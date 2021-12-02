@@ -41,6 +41,5 @@ class CountrySelectionTVCell: UITableViewCell {
     
     func updateViews() {
         label.text = itemLandingPad?.name
-    
     }
 }

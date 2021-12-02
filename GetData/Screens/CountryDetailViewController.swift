@@ -174,6 +174,16 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
             }
         }
     
+    init(countryName:String, isoItem: String) {
+        self.countryName = countryName
+        self.isoItem = isoItem
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
@@ -196,27 +206,16 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
 //    chart.data.notifyDataChanged()
 //    chart.notifyDataSetChanged()
 //    chart.setNeedsDisplay()
-    
-    
-    // can I call create graph with a single line?????
+
     func getCountryData() {
         
         APICaller.shared.getCountryDeathStatus(iso: isoItem, scope: "deaths") { [weak self] result in
             switch result {
             case .success(let dayData):
-//                print("🍟🍟🍟🍟🍟")
-//                print(dayData)
-                // this comes back as index, cases, date
-                self?.dailyDeathData = dayData
-                // call the next api call
-               // self?.getCountryRecovered()
-            
+                self?.dailyDeathData = dayData  // this comes back as index, cases, date
                 APICaller.shared.getCountryRecoveredStatus(iso: self?.isoItem ?? "", scope: "recovered") { [weak self] result in
                     switch result {
                     case .success(let dayRecoveredData):
-                        
-//                        print("😘😘😘😘😘😘😘")
-//                        print(dayRecoveredData)
                         self?.dailyRecoveredData = dayRecoveredData
                         APICaller.shared.getCountryTotalStatus(iso: self?.isoItem ?? "", scope: "confirmed") { [weak self] result in
                             switch result {
@@ -224,8 +223,8 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
                                 
                                 self?.dailyTotalData = dayTotalData
                                 
-                                print("😘😘😘😘😘😘😘")
-                                print(self?.dailyTotalData)
+                                //print("😘😘😘😘😘😘😘")
+                                //print(self?.dailyTotalData)
                             case .failure(let error):
                                 print(error.rawValue)
                             }
@@ -252,7 +251,17 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
 
     let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
             headerView.clipsToBounds = true
-    
+        
+        let l = chart.legend
+               l.horizontalAlignment = .center
+               l.verticalAlignment = .top
+               l.orientation = .horizontal
+               l.xEntrySpace = 7
+               l.yEntrySpace = 0
+               l.yOffset = 5
+        
+        let legend = chart.legend
+         legend.font = UIFont(name: "Verdana", size: 18.0)!
     // This builds an entry which is used for the Bar Chart the Bar Chart can only except (x axis: index Double value, y - axis Double value). However dayData1 should also contain the corresponding index. This is for the Marker. A funtion called
 
         //**************    Daily Death Data
@@ -278,7 +287,7 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
         let set2 = LineChartDataSet(entries: entriesRecovered, label: "Recovered")
         set2.mode = .cubicBezier
         set2.drawCirclesEnabled = false
-        set2.lineWidth = 1
+        set2.lineWidth = 3
         set2.setColor(.green)
         set2.fill = Fill(color: .green)
         set2.fillAlpha = 0.8
@@ -289,13 +298,13 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
             let data = dailyTotalData[index]
             entriesTotal.append(ChartDataEntry(x: Double(index), y: Double(data.casesTotal)))
         }
-        let set3 = LineChartDataSet(entries: entriesTotal, label: "Total")
-        set2.mode = .cubicBezier
-        set2.drawCirclesEnabled = false
-        set2.lineWidth = 3
-        set2.setColor(.yellow)
-        set2.fill = Fill(color: .yellow)
-        set2.fillAlpha = 0.8
+        let set3 = LineChartDataSet(entries: entriesTotal, label: "Total Cases")
+        set3.mode = .cubicBezier
+        set3.drawCirclesEnabled = false
+        set3.lineWidth = 3
+        set3.setColor(.yellow)
+        set3.fill = Fill(color: .yellow)
+        set3.fillAlpha = 0.8
 
     chart.delegate = self
     chart.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .linear)
@@ -331,15 +340,7 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
         customMarkerView.confirmedCasesLabel.text = "Total Cases: \(dailyTotalData[entryIndex].casesTotal)"
     }
 
-    init(countryName:String, isoItem: String) {
-        self.countryName = countryName
-        self.isoItem = isoItem
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+ 
 }
 
 extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -349,15 +350,16 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = dailyDeathData[indexPath.row]
+        let dataDeath = dailyDeathData[indexPath.row]
+        let dataRecovered = dailyRecoveredData[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = createText(with: data)
+        cell.textLabel?.text = createText(with: dataDeath, dataRecovered: dataRecovered)
         return cell
     }
     
-    private func createText(with data: DailyDeathData) -> String? {                       // return a tuple here
-        let dateString = DateFormatter.prettyFormatter.string(from: data.dateDeath)
-        return "\(dateString),           Deaths:  \(data.casesDeath)"
+    private func createText(with dataDeath: DailyDeathData, dataRecovered: DailyRecoveredData) -> String? {                       // return a tuple here
+        let dateString = DateFormatter.prettyFormatter.string(from: dataDeath.dateDeath)
+        return "\(dateString): Deaths: \(dataDeath.casesDeath), Recovered:\(dataRecovered.casesRecovered)"
     }
     
     private func formatDateForMarker(with data: Date) -> String? {

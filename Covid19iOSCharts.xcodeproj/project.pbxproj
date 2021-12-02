@@ -116,6 +116,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE56462627587B7A00549624 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CECDEE00269D182300F67FC6 /* CountrySelectionTVCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		CE56462A27587F7E00549624 /* Marker */ = {
+			isa = PBXGroup;
+			children = (
+				CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */,
+				CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */,
+			);
+			path = Marker;
+			sourceTree = "<group>";
+		};
 		CECDEDB7269D011300F67FC6 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				CECDEE0A269D2B6500F67FC6 /* Screens */,
+				CE56462A27587F7E00549624 /* Marker */,
+				CE56462627587B7A00549624 /* Cells */,
 				CECDEE12269D2E3C00F67FC6 /* Managers */,
 				CECDEE16269D2E5200F67FC6 /* Resources */,
 				CECDEDD1269D011500F67FC6 /* Info.plist */,
@@ -172,11 +191,8 @@
 			isa = PBXGroup;
 			children = (
 				CECDEDC7269D011300F67FC6 /* CountrySelectionVC.swift */,
-				CECDEE00269D182300F67FC6 /* CountrySelectionTVCell.swift */,
 				CECDEE05269D260800F67FC6 /* CountryDetailViewController.swift */,
 				CE828ACC26A9FB0C00769EF4 /* MenuVC.swift */,
-				CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */,
-				CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */,
 				CE11677A270395590070F455 /* SpinnerViewController.swift */,
 				CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */,
 			);
