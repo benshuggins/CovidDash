@@ -157,8 +157,15 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
                 }
             }
         }
-    
     var dailyRecoveredData: [DailyRecoveredData] = [] {
+            didSet {
+                DispatchQueue.main.async{
+                    //self.tableView.reloadData()
+                   // self.createGraph()
+                }
+            }
+        }
+    var dailyTotalData: [DailyTotalData] = [] {
             didSet {
                 DispatchQueue.main.async{
                     //self.tableView.reloadData()
@@ -170,7 +177,7 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        getCountryDeaths()
+        getCountryData()
         view.backgroundColor = .white
         title = "\(countryName.uppercased()) Covid Deaths"
     }
@@ -192,9 +199,9 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
     
     
     // can I call create graph with a single line?????
-    func getCountryDeaths() {
+    func getCountryData() {
         
-        APICaller.shared.getCountryStatus(iso: isoItem, scope: "deaths") { [weak self] result in
+        APICaller.shared.getCountryDeathStatus(iso: isoItem, scope: "deaths") { [weak self] result in
             switch result {
             case .success(let dayData):
 //                print("🍟🍟🍟🍟🍟")
@@ -211,27 +218,28 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
 //                        print("😘😘😘😘😘😘😘")
 //                        print(dayRecoveredData)
                         self?.dailyRecoveredData = dayRecoveredData
-                        
-                    
-                        
-                        
+                        APICaller.shared.getCountryTotalStatus(iso: self?.isoItem ?? "", scope: "confirmed") { [weak self] result in
+                            switch result {
+                            case .success(let dayTotalData):
+                                
+                                self?.dailyTotalData = dayTotalData
+                                
+                                print("😘😘😘😘😘😘😘")
+                                print(self?.dailyTotalData)
+                            case .failure(let error):
+                                print(error.rawValue)
+                            }
+                        }
                     case .failure(let error):
                         print(error.rawValue)
                     }
-                    
                 }
-            
-            
             case .failure(let error):
                 print(error.rawValue)
             }
         }
     }
-   
-    
- // let me = Set([1,1])
-        
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         print ("orientation change")
         chart.removeFromSuperview()
@@ -247,11 +255,7 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
     
     // This builds an entry which is used for the Bar Chart the Bar Chart can only except (x axis: index Double value, y - axis Double value). However dayData1 should also contain the corresponding index. This is for the Marker. A funtion called
 
-    
-    
-        
         //**************    Daily Death Data
-        
         var entriesDeath: [ChartDataEntry] = []
         for index in 0..<dailyDeathData.count {
             let data = dailyDeathData[index]
@@ -265,30 +269,34 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
         set1.fill = Fill(color: .red)
         set1.fillAlpha = 0.8
 
-        
 ////    //**************    Daily Recovered Data
         var entriesRecovered: [ChartDataEntry] = []
-       
-        
         for index in 0..<dailyRecoveredData.count {
             let data = dailyRecoveredData[index]
-            
-            
             entriesRecovered.append(ChartDataEntry(x: Double(index), y: Double(data.casesRecovered)))
         }
-  
         let set2 = LineChartDataSet(entries: entriesRecovered, label: "Recovered")
         set2.mode = .cubicBezier
         set2.drawCirclesEnabled = false
-        set2.lineWidth = 3
+        set2.lineWidth = 1
         set2.setColor(.green)
         set2.fill = Fill(color: .green)
         set2.fillAlpha = 0.8
 
+// Daily Total or Confirmed Cases Data for Graph
+        var entriesTotal: [ChartDataEntry] = []
+        for index in 0..<dailyTotalData.count {
+            let data = dailyTotalData[index]
+            entriesTotal.append(ChartDataEntry(x: Double(index), y: Double(data.casesTotal)))
+        }
+        let set3 = LineChartDataSet(entries: entriesTotal, label: "Total")
+        set2.mode = .cubicBezier
+        set2.drawCirclesEnabled = false
+        set2.lineWidth = 3
+        set2.setColor(.yellow)
+        set2.fill = Fill(color: .yellow)
+        set2.fillAlpha = 0.8
 
-        
-        
-        
     chart.delegate = self
     chart.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .linear)
    
@@ -303,16 +311,9 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
         f.dateStyle = .short
     chart.xAxis.valueFormatter = DateValueFormatter(formatter: f)
         
-        
         let data = LineChartData(dataSet: set1)
-        
         data.addDataSet(set2)
-        
-       // data.addDataSet(set3)
-        
-        
-   // chart.data = dataDeath    // < == here is where we add to the graph //  data.addDataSet(set2)
-     
+        data.addDataSet(set3)
         chart.data = data
         
     headerView.addSubview(chart)
@@ -325,28 +326,11 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
       
         customMarkerView.dateLabel.text =
             formatDateForMarker(with: dailyDeathData[entryIndex].dateDeath)
-
         customMarkerView.deathCountLabel.text = "Deaths: \(dailyDeathData[entryIndex].casesDeath)"
-        
         customMarkerView.recoveredLabel.text = "Recovered: \(dailyRecoveredData[entryIndex].casesRecovered)"
+        customMarkerView.confirmedCasesLabel.text = "Total Cases: \(dailyTotalData[entryIndex].casesTotal)"
     }
-//    func getCountryRecovered() {
-//        APICaller.shared.getCountryStatus(iso: isoItem) { [weak self] result in
-//            switch result {
-//            case .success(let dayData):
-//                print("🍟🍟🍟🍟🍟")
-//                print(dayData)
-//                // this comes back as index, cases, date
-//              //  self?.dailyRecoveredData = dayData
-//                // call the next api call
-//                self?.getCountryRecovered()
-//            case .failure(let error):
-//                print(error.rawValue)
-//            }
-//        }
-//
-//
-//    }
+
     init(countryName:String, isoItem: String) {
         self.countryName = countryName
         self.isoItem = isoItem
@@ -382,26 +366,3 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-
-
-
-//        //**************    Daily Death Data 2nd copy
-//
-//        var entriesDeath: [BarChartDataEntry] = []
-//        for index in 0..<dailyDeathData.count {
-//            let data = dailyDeathData[index]
-//            entriesDeath.append(.init(x: Double(index),y: Double(data.casesDeath)))
-//        }
-//    let dataSetDeath = BarChartDataSet(entries: entriesDeath, label: "Deaths")
-//
-//  //      let set1 = LineChartDataSet(entries: deathEntries, label: "Deaths")
-//
-//
-//        dataSetDeath.setColor(.red)
-//    //dataSet.colors = ChartColorTemplates.joyful()
-//
-//    let dataDeath: BarChartData = BarChartData(dataSet: dataSetDeath)
-//
-//   // let set1 = LineChartDataSet(entries: deathEntries, label: "Deaths")
-//
-//    //************** END OF THE SECOND COPY

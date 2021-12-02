@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CountriesNameTableViewCell: UITableViewCell {
+class CountrySelectionTVCell: UITableViewCell {
     static let identifier = "CountriesTableViewCell"
     
     var itemLandingPad: Country? {

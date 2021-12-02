@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+class CountrySelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
 
     let menuVC = MenuVC()
     
@@ -38,7 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let tableView: UITableView = {
         let table = UITableView()
-        table.register(CountriesNameTableViewCell.self, forCellReuseIdentifier: CountriesNameTableViewCell.identifier)
+        table.register(CountrySelectionTVCell.self, forCellReuseIdentifier: CountrySelectionTVCell.identifier)
         return table
     }()
     
@@ -114,7 +114,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 }
 
-extension ViewController {
+extension CountrySelectionVC {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearching {
             return searchedCountries.count
@@ -124,7 +124,7 @@ extension ViewController {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CountriesNameTableViewCell.identifier, for: indexPath) as! CountriesNameTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CountrySelectionTVCell.identifier, for: indexPath) as! CountrySelectionTVCell
         
         if isSearching {
             
@@ -162,7 +162,7 @@ extension ViewController {
     }
 }
 
-extension ViewController {
+extension CountrySelectionVC {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
                 print(text)

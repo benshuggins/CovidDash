@@ -52,7 +52,7 @@ class APICaller {
                     
                     guard var resultFinal = result?.sorted() else {return}
                     
-                    print("😜😜😜😜😜\(resultFinal)")
+                 //   print("😜😜😜😜😜\(resultFinal)")
                     
                     resultFinal.removeAll(where: { $0.iso == "AX" || $0.iso == "AW" || $0.iso == "BL"  || $0.iso == "BM" || $0.iso == "EH" || $0.iso == "AS" || $0.iso == "AI" || $0.iso == "IO" || $0.iso == "VG" || $0.iso == "BV"})
                     
@@ -75,7 +75,7 @@ class APICaller {
     
     // pass variable into an enum???
     
-    func getCountryStatus(iso: String, scope: String, completion: @escaping (Result<[DailyDeathData], BHError>) -> Void ) {
+    func getCountryDeathStatus(iso: String, scope: String, completion: @escaping (Result<[DailyDeathData], BHError>) -> Void ) {
         
        // https://api.covid19api.com/country/PO/status/deaths
        // https://api.covid19api.com/country/IT/status/deaths
@@ -97,8 +97,8 @@ class APICaller {
                     let result = try? JSONDecoder().decode([CountryData].self, from: data)
                     
                     guard let resultOne = result else {return}
-                    print("🥶🥶🥶🥶🥶resultOne")
-                    print(resultOne)
+                  //  print("🥶🥶🥶🥶🥶resultOne")
+                  //  print(resultOne)
                     
                     // 1 pop up an alert menu saying there is no data yet for this country
        
@@ -147,8 +147,8 @@ func getCountryRecoveredStatus(iso: String, scope: String, completion: @escaping
                 let result = try? JSONDecoder().decode([CountryData].self, from: data)
                 
                 guard let resultOne = result else {return}
-                print("🥶🥶🥶🥶🥶resultOne")
-                print(resultOne)
+               // print("🥶🥶🥶🥶🥶resultOne")
+             //   print(resultOne)
                 
                 // 1 pop up an alert menu saying there is no data yet for this country
    
@@ -175,8 +175,58 @@ func getCountryRecoveredStatus(iso: String, scope: String, completion: @escaping
     }
     task.resume()
 }
+
+
+
+func getCountryTotalStatus(iso: String, scope: String, completion: @escaping (Result<[DailyTotalData], BHError>) -> Void ) {
+    
+   // https://api.covid19api.com/country/IT/status/recovered
+    let baseURL = "https://api.covid19api.com/country/\(iso)/status/confirmed"
+    print("🥙🥙🥙🥙🥙🥙\(baseURL)")
+    
+    guard let url = URL(string: baseURL) else {return}
+    print("🌭🌭🌭🌭🌭🌭\(url)")
+    let task = URLSession.shared.dataTask(with: url) { data, _, error in
+        if let error = error {
+            completion(.failure(.unableToComplete))
+            print(error)
+        }
+        else if let data = data {
+            
+            do {
+                let result = try? JSONDecoder().decode([CountryData].self, from: data)
+                
+                guard let resultOne = result else {return}
+                print("🥶🥶🥶🥶🥶resultOne")
+                print(resultOne)
+                
+                // 1 pop up an alert menu saying there is no data yet for this country
+   
+                //  2 this takes country, cases, date, lat, lon data model and converts it
+                //      to just index, cases, and date that is a date object
+                
+                let modelsTotal: [DailyTotalData] = resultOne.compactMap {
+                    
+                    guard let date = DateFormatter.dayFormatter.date(from: $0.date) else {return nil}
+                    
+                    // Add index to our dayData model
+                    // Which is just index, case, date
+                    index2 += 1
+               
+                    return DailyTotalData(indexTotal: index2-1, dateTotal: date, casesTotal: $0.cases)
+                }
+                print("👹👹👹👹👹👹Here are your viewModels: \(modelsTotal)")
+                completion(.success(modelsTotal))
+                
+            } catch {
+                completion(.failure(.invalidData))
+            }
+        }
+    }
+    task.resume()
 }
 
+}
 //2021-07-12T00:00:00Z
 // First Model
 struct Country: Codable, Comparable, Hashable {
@@ -229,6 +279,12 @@ struct DailyRecoveredData: Codable {
     let indexRecovered: Int
     let dateRecovered: Date
     let casesRecovered: Int//?
+}
+
+struct DailyTotalData: Codable {
+    let indexTotal: Int
+    let dateTotal: Date
+    let casesTotal: Int//?
 }
 
 

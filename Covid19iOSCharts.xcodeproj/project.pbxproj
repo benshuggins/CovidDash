@@ -15,7 +15,7 @@
 		CEA6743F273CDB0800D607A5 /* DayAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */; };
 		CECDEDC4269D011300F67FC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDC3269D011300F67FC6 /* AppDelegate.swift */; };
 		CECDEDC6269D011300F67FC6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDC5269D011300F67FC6 /* SceneDelegate.swift */; };
-		CECDEDC8269D011300F67FC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDC7269D011300F67FC6 /* ViewController.swift */; };
+		CECDEDC8269D011300F67FC6 /* CountrySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDC7269D011300F67FC6 /* CountrySelectionVC.swift */; };
 		CECDEDCB269D011300F67FC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECDEDC9269D011300F67FC6 /* Main.storyboard */; };
 		CECDEDCD269D011500F67FC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECDEDCC269D011500F67FC6 /* Assets.xcassets */; };
 		CECDEDD0269D011500F67FC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECDEDCE269D011500F67FC6 /* LaunchScreen.storyboard */; };
@@ -23,7 +23,7 @@
 		CECDEDE6269D011600F67FC6 /* GetDataUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDE5269D011600F67FC6 /* GetDataUITests.swift */; };
 		CECDEDF7269D028800F67FC6 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDF6269D028800F67FC6 /* APICaller.swift */; };
 		CECDEDFC269D04C900F67FC6 /* BHError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDFB269D04C900F67FC6 /* BHError.swift */; };
-		CECDEE01269D182300F67FC6 /* CountriesNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEE00269D182300F67FC6 /* CountriesNameTableViewCell.swift */; };
+		CECDEE01269D182300F67FC6 /* CountrySelectionTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEE00269D182300F67FC6 /* CountrySelectionTVCell.swift */; };
 		CECDEE06269D260800F67FC6 /* CountryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEE05269D260800F67FC6 /* CountryDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +56,7 @@
 		CECDEDC0269D011300F67FC6 /* Covid19iOSCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Covid19iOSCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECDEDC3269D011300F67FC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECDEDC5269D011300F67FC6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CECDEDC7269D011300F67FC6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CECDEDC7269D011300F67FC6 /* CountrySelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionVC.swift; sourceTree = "<group>"; };
 		CECDEDCA269D011300F67FC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CECDEDCC269D011500F67FC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CECDEDCF269D011500F67FC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 		CECDEDE7269D011600F67FC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CECDEDF6269D028800F67FC6 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		CECDEDFB269D04C900F67FC6 /* BHError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHError.swift; sourceTree = "<group>"; };
-		CECDEE00269D182300F67FC6 /* CountriesNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesNameTableViewCell.swift; sourceTree = "<group>"; };
+		CECDEE00269D182300F67FC6 /* CountrySelectionTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionTVCell.swift; sourceTree = "<group>"; };
 		CECDEE05269D260800F67FC6 /* CountryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,8 +171,8 @@
 		CECDEE0A269D2B6500F67FC6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				CECDEDC7269D011300F67FC6 /* ViewController.swift */,
-				CECDEE00269D182300F67FC6 /* CountriesNameTableViewCell.swift */,
+				CECDEDC7269D011300F67FC6 /* CountrySelectionVC.swift */,
+				CECDEE00269D182300F67FC6 /* CountrySelectionTVCell.swift */,
 				CECDEE05269D260800F67FC6 /* CountryDetailViewController.swift */,
 				CE828ACC26A9FB0C00769EF4 /* MenuVC.swift */,
 				CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */,
@@ -386,10 +386,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CECDEDC8269D011300F67FC6 /* ViewController.swift in Sources */,
+				CECDEDC8269D011300F67FC6 /* CountrySelectionVC.swift in Sources */,
 				CECDEDC4269D011300F67FC6 /* AppDelegate.swift in Sources */,
 				CE5B6C2A26EA875100C6BE3E /* CustomMarkerView.swift in Sources */,
-				CECDEE01269D182300F67FC6 /* CountriesNameTableViewCell.swift in Sources */,
+				CECDEE01269D182300F67FC6 /* CountrySelectionTVCell.swift in Sources */,
 				CE11677B270395590070F455 /* SpinnerViewController.swift in Sources */,
 				CECDEE06269D260800F67FC6 /* CountryDetailViewController.swift in Sources */,
 				CEA6743F273CDB0800D607A5 /* DayAxisValueFormatter.swift in Sources */,
