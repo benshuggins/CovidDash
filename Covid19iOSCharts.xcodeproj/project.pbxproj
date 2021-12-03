@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		04F8263DE88634FB8934BEA6 /* Pods_GetData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5280085A9D1B771CE37E90DA /* Pods_GetData.framework */; };
 		CE11677B270395590070F455 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11677A270395590070F455 /* SpinnerViewController.swift */; };
+		CE5646352758A68C00549624 /* DateValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5646342758A68B00549624 /* DateValueFormatter.swift */; };
 		CE5B6C2526EA856D00C6BE3E /* CustomMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */; };
 		CE5B6C2A26EA875100C6BE3E /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */; };
 		CE828ACD26A9FB0C00769EF4 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE828ACC26A9FB0C00769EF4 /* MenuVC.swift */; };
@@ -49,6 +50,7 @@
 		B8D345C9BCBBE2D07A0121AC /* Pods-GetData.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetData.debug.xcconfig"; path = "Target Support Files/Pods-GetData/Pods-GetData.debug.xcconfig"; sourceTree = "<group>"; };
 		C11E3B010EA7D7B902669F78 /* Pods-GetData.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetData.release.xcconfig"; path = "Target Support Files/Pods-GetData/Pods-GetData.release.xcconfig"; sourceTree = "<group>"; };
 		CE11677A270395590070F455 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
+		CE5646342758A68B00549624 /* DateValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValueFormatter.swift; sourceTree = "<group>"; };
 		CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMarkerView.xib; sourceTree = "<group>"; };
 		CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
 		CE828ACC26A9FB0C00769EF4 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
@@ -124,15 +126,6 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		CE56462A27587F7E00549624 /* Marker */ = {
-			isa = PBXGroup;
-			children = (
-				CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */,
-				CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */,
-			);
-			path = Marker;
-			sourceTree = "<group>";
-		};
 		CECDEDB7269D011300F67FC6 = {
 			isa = PBXGroup;
 			children = (
@@ -159,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				CECDEE0A269D2B6500F67FC6 /* Screens */,
-				CE56462A27587F7E00549624 /* Marker */,
 				CE56462627587B7A00549624 /* Cells */,
 				CECDEE12269D2E3C00F67FC6 /* Managers */,
 				CECDEE16269D2E5200F67FC6 /* Resources */,
@@ -195,6 +187,9 @@
 				CE828ACC26A9FB0C00769EF4 /* MenuVC.swift */,
 				CE11677A270395590070F455 /* SpinnerViewController.swift */,
 				CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */,
+				CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */,
+				CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */,
+				CE5646342758A68B00549624 /* DateValueFormatter.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -404,6 +399,7 @@
 			files = (
 				CECDEDC8269D011300F67FC6 /* CountrySelectionVC.swift in Sources */,
 				CECDEDC4269D011300F67FC6 /* AppDelegate.swift in Sources */,
+				CE5646352758A68C00549624 /* DateValueFormatter.swift in Sources */,
 				CE5B6C2A26EA875100C6BE3E /* CustomMarkerView.swift in Sources */,
 				CECDEE01269D182300F67FC6 /* CountrySelectionTVCell.swift in Sources */,
 				CE11677B270395590070F455 /* SpinnerViewController.swift in Sources */,

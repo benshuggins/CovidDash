@@ -1,9 +1,5 @@
 //
 //  CountryDetailViewController.swift
-//  GetData
-//
-//  Created by Ben Huggins on 7/12/21.
-//
 
 //"2021-07-13T00:00:00Z" need to format these dates to 07/13/2021
 
@@ -12,129 +8,9 @@
 import UIKit
 import Charts
 
-final class DateValueFormatter: IAxisValueFormatter {
-
-    // this is adjustable, we want give value return date
-//
-//    let months = ["Jan", "Feb", "Mar",
-//                  "Apr", "May", "Jun",
-//                  "Jul", "Aug", "Sep",
-//                  "Oct", "Nov", "Dec"]
-////
-//    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-//   // return String(value+21)//formatter.string(from: Date(timeIntervalSinceReferenceDate: value))
-//    return months[Int(value) % months.count]
-//  }
-    
-    weak var chart: BarLineChartViewBase?
-    let months = ["Jan", "Feb", "Mar",
-                  "Apr", "May", "Jun",
-                  "Jul", "Aug", "Sep",
-                  "Oct", "Nov", "Dec"]
-    
-//    init(chart: BarLineChartViewBase) {
-//        self.chart = chart
-//    }
-
-  let formatter: DateFormatter
-
-  init(formatter: DateFormatter) {
-    self.formatter = formatter
-  }
-    
-    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        let days = Int(value)
-        let year = determineYear(forDays: days)
-        let month = determineMonth(forDayOfYear: days)
-        
-        let monthName = months[month % months.count]
-        let yearName = "\(year)"
-        
-        if let chart = chart,
-            chart.visibleXRange > 30 * 6 {
-            return monthName + yearName
-        } else {
-            let dayOfMonth = determineDayOfMonth(forDays: days, month: month + 12 * (year - 2016))
-            var appendix: String
-            
-            switch dayOfMonth {
-            case 1, 21, 31: appendix = "st"
-            case 2, 22: appendix = "nd"
-            case 3, 23: appendix = "rd"
-            default: appendix = "th"
-            }
-            
-            return dayOfMonth == 0 ? "" : String(format: "%d\(appendix) \(monthName)", dayOfMonth)
-        }
-    }
-    
-    private func days(forMonth month: Int, year: Int) -> Int {
-        // month is 0-based
-        switch month {
-        case 1:
-            var is29Feb = false
-            if year < 1582 {
-                is29Feb = (year < 1 ? year + 1 : year) % 4 == 0
-            } else if year > 1582 {
-                is29Feb = year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)
-            }
-            
-            return is29Feb ? 29 : 28
-            
-        case 3, 5, 8, 10:
-            return 30
-            
-        default:
-            return 31
-        }
-    }
-    
-    private func determineMonth(forDayOfYear dayOfYear: Int) -> Int {
-        var month = -1
-        var days = 0
-        
-        while days < dayOfYear {
-            month += 1
-            if month >= 12 {
-                month = 0
-            }
-            
-            let year = determineYear(forDays: days)
-            days += self.days(forMonth: month, year: year)
-        }
-        
-        return max(month, 0)
-    }
-    
-    private func determineDayOfMonth(forDays days: Int, month: Int) -> Int {
-        var count = 0
-        var daysForMonth = 0
-        
-        while count < month {
-            let year = determineYear(forDays: days)
-            daysForMonth += self.days(forMonth: count % 12, year: year)
-            count += 1
-        }
-        
-        return days - daysForMonth
-    }
-    
-    private func determineYear(forDays days: Int) -> Int {
-        switch days {
-        case ...366: return 2020
-        case 367...730: return 2021
-        case 731...1094: return 2022
-        case 1095...1458: return 2023
-        default: return 2020
-        }
-    }
-}
-
-
-
 class CountryDetailViewController: UIViewController, ChartViewDelegate {
         
-    let customMarkerView = CustomMarkerView() // Instance of CustomMarker
+   private let customMarkerView = CustomMarkerView() // Instance of CustomMarker
   
     static let identifier = "CountryDetailViewController"
     
@@ -192,7 +68,7 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
         title = "\(countryName.uppercased()) Covid Deaths"
     }
     
-    func configureTableView() {
+    private func configureTableView() {
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
@@ -207,7 +83,7 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
 //    chart.notifyDataSetChanged()
 //    chart.setNeedsDisplay()
 
-    func getCountryData() {
+    private func getCountryData() {
         
         APICaller.shared.getCountryDeathStatus(iso: isoItem, scope: "deaths") { [weak self] result in
             switch result {
@@ -220,11 +96,7 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
                         APICaller.shared.getCountryTotalStatus(iso: self?.isoItem ?? "", scope: "confirmed") { [weak self] result in
                             switch result {
                             case .success(let dayTotalData):
-                                
                                 self?.dailyTotalData = dayTotalData
-                                
-                                //print("😘😘😘😘😘😘😘")
-                                //print(self?.dailyTotalData)
                             case .failure(let error):
                                 print(error.rawValue)
                             }
@@ -262,8 +134,7 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
         
         let legend = chart.legend
          legend.font = UIFont(name: "Verdana", size: 18.0)!
-    // This builds an entry which is used for the Bar Chart the Bar Chart can only except (x axis: index Double value, y - axis Double value). However dayData1 should also contain the corresponding index. This is for the Marker. A funtion called
-
+   
         //**************    Daily Death Data
         var entriesDeath: [ChartDataEntry] = []
         for index in 0..<dailyDeathData.count {
@@ -337,10 +208,8 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
             formatDateForMarker(with: dailyDeathData[entryIndex].dateDeath)
         customMarkerView.deathCountLabel.text = "Deaths: \(dailyDeathData[entryIndex].casesDeath)"
         customMarkerView.recoveredLabel.text = "Recovered: \(dailyRecoveredData[entryIndex].casesRecovered)"
-        customMarkerView.confirmedCasesLabel.text = "Total Cases: \(dailyTotalData[entryIndex].casesTotal)"
+        customMarkerView.confirmedCasesLabel.text = "Confirmed: \(dailyTotalData[entryIndex].casesTotal)"
     }
-
- 
 }
 
 extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -352,14 +221,15 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dataDeath = dailyDeathData[indexPath.row]
         let dataRecovered = dailyRecoveredData[indexPath.row]
+        let dataTotal = dailyTotalData[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = createText(with: dataDeath, dataRecovered: dataRecovered)
+        cell.textLabel?.text = createText(with: dataDeath, dataRecovered: dataRecovered, dataTotal: dataTotal)
         return cell
     }
     
-    private func createText(with dataDeath: DailyDeathData, dataRecovered: DailyRecoveredData) -> String? {                       // return a tuple here
+    private func createText(with dataDeath: DailyDeathData, dataRecovered: DailyRecoveredData, dataTotal: DailyTotalData) -> String? {                       // return a tuple here
         let dateString = DateFormatter.prettyFormatter.string(from: dataDeath.dateDeath)
-        return "\(dateString): Deaths: \(dataDeath.casesDeath), Recovered:\(dataRecovered.casesRecovered)"
+        return "\(dateString): Deaths: \(dataDeath.casesDeath), Recovered:\(dataRecovered.casesRecovered), Confirmed:\(dataTotal.casesTotal)"
     }
     
     private func formatDateForMarker(with data: Date) -> String? {
