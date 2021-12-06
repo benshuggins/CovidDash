@@ -10,9 +10,9 @@ import UIKit
 class CountrySelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
 
     let menuVC = MenuVC()
-    
-    // removing/ filtering certain object data
-    
+    let developerMenuVC = DeveloperMenuVC()
+    private var slideInTransitionDelegate: SlideInPresentationManager!
+ 
     var countries: [Country] = [] {
         didSet {
            
@@ -21,9 +21,7 @@ class CountrySelectionVC: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-    
-   
-    
+
     var searchedCountries: [Country] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -57,19 +55,47 @@ class CountrySelectionVC: UIViewController, UITableViewDelegate, UITableViewData
         search.searchBar.placeholder = "Enter Country"
         navigationItem.searchController = search
         
+//        let rightBarButtonItem = UIBarButtonItem(title: "Menu", style: .done, target: self, action: #selector(rightBarButtonTapped))
+//
+//        self.navigationItem.rightBarButtonItem  = rightBarButtonItem
         
-        let rightBarButtonItem = UIBarButtonItem(title: "Menu", style: .done, target: self, action: #selector(rightBarButtonTapped))
-        
+        let rightBarButtonItem = UIBarButtonItem(title: "API", style: .done, target: self, action: #selector(rightBarButtonTapped))
         self.navigationItem.rightBarButtonItem  = rightBarButtonItem
+
         
+       
+        // Left Bar Button
+        let leftBarButtonItem = UIBarButtonItem(title: "Developer", style: .done, target: self, action: #selector(leftBarButtonTapped))
+        self.navigationItem.leftBarButtonItem  = leftBarButtonItem
     }
     
+    
+//    @objc func rightBarButtonTapped() {
+//
+//        print("RIGHT BAR BUTTON WAS TAPPED")
+//        navigationController?.pushViewController(menuVC, animated: true)
+//        //self.present(menuVC, animated: true, completion: nil)
+//
+//    }
+    
     @objc func rightBarButtonTapped() {
-        
+        let controller = MenuVC()
+        slideInTransitionDelegate = SlideInPresentationManager()
+        slideInTransitionDelegate.direction = .right
+        controller.modalPresentationStyle = .custom
+        controller.transitioningDelegate = slideInTransitionDelegate
+        present(controller, animated: true, completion: nil)
         print("RIGHT BAR BUTTON WAS TAPPED")
-        navigationController?.pushViewController(menuVC, animated: true)
-        //self.present(menuVC, animated: true, completion: nil)
-        
+    }
+    
+    @objc func leftBarButtonTapped() {
+        let controller2 = DeveloperMenuVC()
+        slideInTransitionDelegate = SlideInPresentationManager()
+        slideInTransitionDelegate.direction = .left
+        controller2.modalPresentationStyle = .custom
+        controller2.transitioningDelegate = slideInTransitionDelegate
+        present(controller2, animated: true, completion: nil)
+        print("Left BAR BUTTON WAS TAPPED")
     }
 
     func getCountryName() {
@@ -78,9 +104,6 @@ class CountrySelectionVC: UIViewController, UITableViewDelegate, UITableViewData
             switch result {
             case .success(let countries):
                 
-                
-                
-               
                 self?.countries = countries
                // print("🍟🍟🍟🍟🍟\(countries)")
 

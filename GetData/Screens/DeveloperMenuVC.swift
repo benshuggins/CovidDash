@@ -1,5 +1,5 @@
 //
-//  MenuVC.swift
+//  DeveloperMenuVC.swift
 //  Covid19iOSCharts
 //
 //  Created by Ben Huggins on 12/2/21.
@@ -7,16 +7,14 @@
 
 import UIKit
 
-class TableHeader: UITableViewHeaderFooterView, UITableViewDelegate {
+class TableHeaderDev: UITableViewHeaderFooterView, UITableViewDelegate {
     
-    static let identifier = "TableHeader"
+    static let identifier = "TableHeaderDev"
     
     private let imageView: UIImageView = {
       let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "apiImage")
-//        imageView.layer.cornerRadius = 20
-//        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "benImage")
       return imageView
     }()
     
@@ -43,67 +41,59 @@ class TableHeader: UITableViewHeaderFooterView, UITableViewDelegate {
         label.sizeToFit()
         label.frame = CGRect(x: 0, y: contentView.frame.size.height-10-label.frame.size.height, width: contentView.frame.size.width, height: contentView.frame.size.height)
         
-        imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height-15-label.frame.size.height+200)
-//        self.imageView.layer.cornerRadius = 20
-//        self.imageView.layer.masksToBounds = false
-        
-        
+        imageView.frame = CGRect(x: 0, y: 40, width: contentView.frame.size.width, height: contentView.frame.size.height-15-label.frame.size.height+180)
     }
 }
-   // Need to add CustomTableViewCell
-class MenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+
+class DeveloperMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
-    static let menuVC = MenuVC()
+    static let developerMenuVC = DeveloperMenuVC()
     
-    let data = ["Go To: www.covid19.com", "How to use App", "Sources", "Github"]
+    let data = ["LinkedIn", "Github", "Contact", "Github"]
     
     let tableView: UITableView = {
         let table = UITableView()
-        table.register(MenuVCTableViewCell.self, forCellReuseIdentifier: MenuVCTableViewCell.identifier)
-        table.register(TableHeader.self, forHeaderFooterViewReuseIdentifier: "header")
+        table.register(DeveloperMenuTableViewCell.self, forCellReuseIdentifier: DeveloperMenuTableViewCell.identifier)
+        table.register(TableHeaderDev.self, forHeaderFooterViewReuseIdentifier: "header")
         return table
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Menu"
-        //view.backgroundColor = .systemBlue
+        title = "Developer"
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
+        
         self.view.layer.cornerRadius = 20
         self.view.layer.masksToBounds = true
-        tableView.tableFooterView = UIView(frame: CGRect.zero)
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
-        self.tableView.layer.cornerRadius = 9
-        self.tableView.layer.masksToBounds = true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: MenuVCTableViewCell.identifier, for: indexPath) as? MenuVCTableViewCell
-        cell?.textLabel?.text = "hello word"
-        
-        return cell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: DeveloperMenuTableViewCell.identifier) as! DeveloperMenuTableViewCell
+        let data1 = data[indexPath.row]
+        cell.data = data1
+        return cell
     }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? TableHeader
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? TableHeaderDev
         return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 200
     }
+
+
 }
-
-

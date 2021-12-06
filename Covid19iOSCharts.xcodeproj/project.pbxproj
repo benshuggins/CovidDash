@@ -10,9 +10,15 @@
 		04F8263DE88634FB8934BEA6 /* Pods_GetData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5280085A9D1B771CE37E90DA /* Pods_GetData.framework */; };
 		CE11677B270395590070F455 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11677A270395590070F455 /* SpinnerViewController.swift */; };
 		CE5646352758A68C00549624 /* DateValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5646342758A68B00549624 /* DateValueFormatter.swift */; };
+		CE56463F2759B79800549624 /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56463E2759B79800549624 /* SlideInPresentationManager.swift */; };
+		CE5646472759B7BE00549624 /* SlideInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5646462759B7BE00549624 /* SlideInPresentationController.swift */; };
+		CE56464C2759B7E800549624 /* SlideInPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56464B2759B7E800549624 /* SlideInPresentationAnimator.swift */; };
+		CE5646572759B97600549624 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5646562759B97600549624 /* MenuVC.swift */; };
+		CE56465C2759B99300549624 /* DeveloperMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56465B2759B99300549624 /* DeveloperMenuVC.swift */; };
+		CE5646612759B9CD00549624 /* DeveloperMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5646602759B9CD00549624 /* DeveloperMenuTableViewCell.swift */; };
+		CE5646662759B9F200549624 /* MenuVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5646652759B9F200549624 /* MenuVCTableViewCell.swift */; };
 		CE5B6C2526EA856D00C6BE3E /* CustomMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */; };
 		CE5B6C2A26EA875100C6BE3E /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */; };
-		CE828ACD26A9FB0C00769EF4 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE828ACC26A9FB0C00769EF4 /* MenuVC.swift */; };
 		CEA6743F273CDB0800D607A5 /* DayAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */; };
 		CECDEDC4269D011300F67FC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDC3269D011300F67FC6 /* AppDelegate.swift */; };
 		CECDEDC6269D011300F67FC6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDC5269D011300F67FC6 /* SceneDelegate.swift */; };
@@ -51,9 +57,15 @@
 		C11E3B010EA7D7B902669F78 /* Pods-GetData.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetData.release.xcconfig"; path = "Target Support Files/Pods-GetData/Pods-GetData.release.xcconfig"; sourceTree = "<group>"; };
 		CE11677A270395590070F455 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		CE5646342758A68B00549624 /* DateValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValueFormatter.swift; sourceTree = "<group>"; };
+		CE56463E2759B79800549624 /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
+		CE5646462759B7BE00549624 /* SlideInPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationController.swift; sourceTree = "<group>"; };
+		CE56464B2759B7E800549624 /* SlideInPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationAnimator.swift; sourceTree = "<group>"; };
+		CE5646562759B97600549624 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
+		CE56465B2759B99300549624 /* DeveloperMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperMenuVC.swift; sourceTree = "<group>"; };
+		CE5646602759B9CD00549624 /* DeveloperMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperMenuTableViewCell.swift; sourceTree = "<group>"; };
+		CE5646652759B9F200549624 /* MenuVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVCTableViewCell.swift; sourceTree = "<group>"; };
 		CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMarkerView.xib; sourceTree = "<group>"; };
 		CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
-		CE828ACC26A9FB0C00769EF4 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAxisValueFormatter.swift; sourceTree = "<group>"; };
 		CECDEDC0269D011300F67FC6 /* Covid19iOSCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Covid19iOSCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECDEDC3269D011300F67FC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -122,8 +134,20 @@
 			isa = PBXGroup;
 			children = (
 				CECDEE00269D182300F67FC6 /* CountrySelectionTVCell.swift */,
+				CE5646602759B9CD00549624 /* DeveloperMenuTableViewCell.swift */,
+				CE5646652759B9F200549624 /* MenuVCTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		CE56463D2759B76300549624 /* PresentationMenu */ = {
+			isa = PBXGroup;
+			children = (
+				CE56463E2759B79800549624 /* SlideInPresentationManager.swift */,
+				CE5646462759B7BE00549624 /* SlideInPresentationController.swift */,
+				CE56464B2759B7E800549624 /* SlideInPresentationAnimator.swift */,
+			);
+			name = PresentationMenu;
 			sourceTree = "<group>";
 		};
 		CECDEDB7269D011300F67FC6 = {
@@ -153,6 +177,7 @@
 			children = (
 				CECDEE0A269D2B6500F67FC6 /* Screens */,
 				CE56462627587B7A00549624 /* Cells */,
+				CE56463D2759B76300549624 /* PresentationMenu */,
 				CECDEE12269D2E3C00F67FC6 /* Managers */,
 				CECDEE16269D2E5200F67FC6 /* Resources */,
 				CECDEDD1269D011500F67FC6 /* Info.plist */,
@@ -184,12 +209,13 @@
 			children = (
 				CECDEDC7269D011300F67FC6 /* CountrySelectionVC.swift */,
 				CECDEE05269D260800F67FC6 /* CountryDetailViewController.swift */,
-				CE828ACC26A9FB0C00769EF4 /* MenuVC.swift */,
 				CE11677A270395590070F455 /* SpinnerViewController.swift */,
 				CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */,
 				CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */,
 				CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */,
 				CE5646342758A68B00549624 /* DateValueFormatter.swift */,
+				CE5646562759B97600549624 /* MenuVC.swift */,
+				CE56465B2759B99300549624 /* DeveloperMenuVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -398,17 +424,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				CECDEDC8269D011300F67FC6 /* CountrySelectionVC.swift in Sources */,
+				CE56464C2759B7E800549624 /* SlideInPresentationAnimator.swift in Sources */,
 				CECDEDC4269D011300F67FC6 /* AppDelegate.swift in Sources */,
 				CE5646352758A68C00549624 /* DateValueFormatter.swift in Sources */,
+				CE56465C2759B99300549624 /* DeveloperMenuVC.swift in Sources */,
 				CE5B6C2A26EA875100C6BE3E /* CustomMarkerView.swift in Sources */,
 				CECDEE01269D182300F67FC6 /* CountrySelectionTVCell.swift in Sources */,
+				CE5646612759B9CD00549624 /* DeveloperMenuTableViewCell.swift in Sources */,
 				CE11677B270395590070F455 /* SpinnerViewController.swift in Sources */,
 				CECDEE06269D260800F67FC6 /* CountryDetailViewController.swift in Sources */,
+				CE56463F2759B79800549624 /* SlideInPresentationManager.swift in Sources */,
 				CEA6743F273CDB0800D607A5 /* DayAxisValueFormatter.swift in Sources */,
 				CECDEDC6269D011300F67FC6 /* SceneDelegate.swift in Sources */,
-				CE828ACD26A9FB0C00769EF4 /* MenuVC.swift in Sources */,
+				CE5646472759B7BE00549624 /* SlideInPresentationController.swift in Sources */,
 				CECDEDF7269D028800F67FC6 /* APICaller.swift in Sources */,
 				CECDEDFC269D04C900F67FC6 /* BHError.swift in Sources */,
+				CE5646572759B97600549624 /* MenuVC.swift in Sources */,
+				CE5646662759B9F200549624 /* MenuVCTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
