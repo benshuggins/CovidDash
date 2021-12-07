@@ -1,17 +1,17 @@
-//
 //  ViewController.swift
 //  GetData
 //
 //  Created by Ben Huggins on 7/12/21.
-//
 
 import UIKit
 
-class CountrySelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+class CountrySelectionVC: UIViewController {
 
     let menuVC = MenuVC()
     let developerMenuVC = DeveloperMenuVC()
     private var slideInTransitionDelegate: SlideInPresentationManager!
+    var isSearching = false
+    let searchBar = UISearchBar()
  
     var countries: [Country] = [] {
         didSet {
@@ -21,7 +21,6 @@ class CountrySelectionVC: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-
     var searchedCountries: [Country] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -29,10 +28,6 @@ class CountrySelectionVC: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-    
-    var isSearching = false
-    
-    let searchBar = UISearchBar()
     
     let tableView: UITableView = {
         let table = UITableView()
@@ -55,29 +50,13 @@ class CountrySelectionVC: UIViewController, UITableViewDelegate, UITableViewData
         search.searchBar.placeholder = "Enter Country"
         navigationItem.searchController = search
         
-//        let rightBarButtonItem = UIBarButtonItem(title: "Menu", style: .done, target: self, action: #selector(rightBarButtonTapped))
-//
-//        self.navigationItem.rightBarButtonItem  = rightBarButtonItem
-        
-        let rightBarButtonItem = UIBarButtonItem(title: "API", style: .done, target: self, action: #selector(rightBarButtonTapped))
+        let rightBarButtonItem = UIBarButtonItem(title: "About", style: .done, target: self, action: #selector(rightBarButtonTapped))
         self.navigationItem.rightBarButtonItem  = rightBarButtonItem
 
-        
-       
-        // Left Bar Button
-        let leftBarButtonItem = UIBarButtonItem(title: "Developer", style: .done, target: self, action: #selector(leftBarButtonTapped))
+        let leftBarButtonItem = UIBarButtonItem(title: "Menu", style: .done, target: self, action: #selector(leftBarButtonTapped))
         self.navigationItem.leftBarButtonItem  = leftBarButtonItem
     }
-    
-    
-//    @objc func rightBarButtonTapped() {
-//
-//        print("RIGHT BAR BUTTON WAS TAPPED")
-//        navigationController?.pushViewController(menuVC, animated: true)
-//        //self.present(menuVC, animated: true, completion: nil)
-//
-//    }
-    
+
     @objc func rightBarButtonTapped() {
         let controller = MenuVC()
         slideInTransitionDelegate = SlideInPresentationManager()
@@ -103,10 +82,7 @@ class CountrySelectionVC: UIViewController, UITableViewDelegate, UITableViewData
         APICaller.shared.getCountryNames { [weak self] result in
             switch result {
             case .success(let countries):
-                
                 self?.countries = countries
-               // print("🍟🍟🍟🍟🍟\(countries)")
-
             case .failure(let error):
                 print(error.rawValue)
             }
@@ -115,8 +91,6 @@ class CountrySelectionVC: UIViewController, UITableViewDelegate, UITableViewData
     
     func createSpinnerView() {
         let child = SpinnerViewController()
-
-        // add the spinner view controller
         addChild(child)
         child.view.frame = view.frame
         view.addSubview(child.view)
@@ -137,7 +111,7 @@ class CountrySelectionVC: UIViewController, UITableViewDelegate, UITableViewData
     }
 }
 
-extension CountrySelectionVC {
+extension CountrySelectionVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearching {
             return searchedCountries.count
@@ -161,37 +135,28 @@ extension CountrySelectionVC {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if isSearching{
-            
             let selectedRow = searchedCountries[indexPath.row]
             print("Row Number: \(selectedRow)")
             let name = selectedRow.name
             let iso = selectedRow.iso
-            
             let secondVC = CountryDetailViewController(countryName: name, isoItem: iso)
             present(UINavigationController(rootViewController: secondVC), animated: true)
             createSpinnerView()
-            
         } else {
-           
             let selectedRow = countries[indexPath.row]
             print("Row Number: \(selectedRow)")
             let name = selectedRow.name
             let iso = selectedRow.iso
-            
             let secondVC = CountryDetailViewController(countryName: name, isoItem: iso)
             present(UINavigationController(rootViewController: secondVC), animated: true)
             createSpinnerView()
         }
     }
 }
-
-extension CountrySelectionVC {
+extension CountrySelectionVC: UISearchBarDelegate, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-                print(text)
-        
-        searchedCountries = countries.filter{ $0.name.lowercased().prefix(text.count) == text.lowercased()
-        }
+        searchedCountries = countries.filter{ $0.name.lowercased().prefix(text.count) == text.lowercased() }
         print("🥩🥩🥩🥩🥩🥩\(searchedCountries)")
         isSearching = true
         tableView.reloadData()

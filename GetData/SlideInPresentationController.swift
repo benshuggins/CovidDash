@@ -4,8 +4,6 @@
 //
 //  Created by Ben Huggins on 12/2/21.
 //
-
-
 import UIKit
 
 class SlideInPresentationController: UIPresentationController {
@@ -53,7 +51,6 @@ class SlideInPresentationController: UIPresentationController {
       }
       // 1
       containerView?.insertSubview(dimmingView, at: 0)
-
       // 2
       NSLayoutConstraint.activate(
         NSLayoutConstraint.constraints(withVisualFormat: "V:|[dimmingView]|",
@@ -61,7 +58,6 @@ class SlideInPresentationController: UIPresentationController {
       NSLayoutConstraint.activate(
         NSLayoutConstraint.constraints(withVisualFormat: "H:|[dimmingView]|",
           options: [], metrics: nil, views: ["dimmingView": dimmingView]))
-
       //3
       guard let coordinator = presentedViewController.transitionCoordinator else {
         dimmingView.alpha = 1.0
@@ -110,13 +106,9 @@ private extension SlideInPresentationController {
         target: self,
         action: #selector(handleTap(recognizer:)))
     dimmingView.addGestureRecognizer(recognizer)
-  
-  
   }
  
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
       presentingViewController.dismiss(animated: true)
-        
-   
     }
 }

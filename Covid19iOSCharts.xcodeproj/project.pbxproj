@@ -17,6 +17,11 @@
 		CE56465C2759B99300549624 /* DeveloperMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56465B2759B99300549624 /* DeveloperMenuVC.swift */; };
 		CE5646612759B9CD00549624 /* DeveloperMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5646602759B9CD00549624 /* DeveloperMenuTableViewCell.swift */; };
 		CE5646662759B9F200549624 /* MenuVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5646652759B9F200549624 /* MenuVCTableViewCell.swift */; };
+		CE564706275EF83300549624 /* CountryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE564705275EF83300549624 /* CountryData.swift */; };
+		CE564711275EFD1700549624 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE564710275EFD1700549624 /* Country.swift */; };
+		CE564716275EFEF500549624 /* DailyDeathData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE564715275EFEF500549624 /* DailyDeathData.swift */; };
+		CE56471B275EFF2600549624 /* DailyRecoveredData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56471A275EFF2600549624 /* DailyRecoveredData.swift */; };
+		CE564720275F002000549624 /* DailyTotalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56471F275F002000549624 /* DailyTotalData.swift */; };
 		CE5B6C2526EA856D00C6BE3E /* CustomMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */; };
 		CE5B6C2A26EA875100C6BE3E /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */; };
 		CEA6743F273CDB0800D607A5 /* DayAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */; };
@@ -64,6 +69,11 @@
 		CE56465B2759B99300549624 /* DeveloperMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperMenuVC.swift; sourceTree = "<group>"; };
 		CE5646602759B9CD00549624 /* DeveloperMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperMenuTableViewCell.swift; sourceTree = "<group>"; };
 		CE5646652759B9F200549624 /* MenuVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVCTableViewCell.swift; sourceTree = "<group>"; };
+		CE564705275EF83300549624 /* CountryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryData.swift; sourceTree = "<group>"; };
+		CE564710275EFD1700549624 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		CE564715275EFEF500549624 /* DailyDeathData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDeathData.swift; sourceTree = "<group>"; };
+		CE56471A275EFF2600549624 /* DailyRecoveredData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecoveredData.swift; sourceTree = "<group>"; };
+		CE56471F275F002000549624 /* DailyTotalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTotalData.swift; sourceTree = "<group>"; };
 		CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMarkerView.xib; sourceTree = "<group>"; };
 		CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
 		CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAxisValueFormatter.swift; sourceTree = "<group>"; };
@@ -150,6 +160,29 @@
 			name = PresentationMenu;
 			sourceTree = "<group>";
 		};
+		CE5646F4275EE0D700549624 /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				CE5646342758A68B00549624 /* DateValueFormatter.swift */,
+				CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */,
+				CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */,
+				CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		CE564704275EF80D00549624 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE564705275EF83300549624 /* CountryData.swift */,
+				CE564710275EFD1700549624 /* Country.swift */,
+				CE564715275EFEF500549624 /* DailyDeathData.swift */,
+				CE56471A275EFF2600549624 /* DailyRecoveredData.swift */,
+				CE56471F275F002000549624 /* DailyTotalData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CECDEDB7269D011300F67FC6 = {
 			isa = PBXGroup;
 			children = (
@@ -175,10 +208,12 @@
 		CECDEDC2269D011300F67FC6 /* GetData */ = {
 			isa = PBXGroup;
 			children = (
+				CE564704275EF80D00549624 /* Models */,
 				CECDEE0A269D2B6500F67FC6 /* Screens */,
+				CECDEE12269D2E3C00F67FC6 /* Managers */,
+				CE5646F4275EE0D700549624 /* Graph */,
 				CE56462627587B7A00549624 /* Cells */,
 				CE56463D2759B76300549624 /* PresentationMenu */,
-				CECDEE12269D2E3C00F67FC6 /* Managers */,
 				CECDEE16269D2E5200F67FC6 /* Resources */,
 				CECDEDD1269D011500F67FC6 /* Info.plist */,
 				CECDEE0E269D2E3500F67FC6 /* Utilities */,
@@ -210,12 +245,8 @@
 				CECDEDC7269D011300F67FC6 /* CountrySelectionVC.swift */,
 				CECDEE05269D260800F67FC6 /* CountryDetailViewController.swift */,
 				CE11677A270395590070F455 /* SpinnerViewController.swift */,
-				CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */,
-				CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */,
-				CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */,
-				CE5646342758A68B00549624 /* DateValueFormatter.swift */,
-				CE5646562759B97600549624 /* MenuVC.swift */,
 				CE56465B2759B99300549624 /* DeveloperMenuVC.swift */,
+				CE5646562759B97600549624 /* MenuVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -428,16 +459,21 @@
 				CECDEDC4269D011300F67FC6 /* AppDelegate.swift in Sources */,
 				CE5646352758A68C00549624 /* DateValueFormatter.swift in Sources */,
 				CE56465C2759B99300549624 /* DeveloperMenuVC.swift in Sources */,
+				CE564706275EF83300549624 /* CountryData.swift in Sources */,
 				CE5B6C2A26EA875100C6BE3E /* CustomMarkerView.swift in Sources */,
 				CECDEE01269D182300F67FC6 /* CountrySelectionTVCell.swift in Sources */,
+				CE564711275EFD1700549624 /* Country.swift in Sources */,
 				CE5646612759B9CD00549624 /* DeveloperMenuTableViewCell.swift in Sources */,
 				CE11677B270395590070F455 /* SpinnerViewController.swift in Sources */,
+				CE56471B275EFF2600549624 /* DailyRecoveredData.swift in Sources */,
 				CECDEE06269D260800F67FC6 /* CountryDetailViewController.swift in Sources */,
 				CE56463F2759B79800549624 /* SlideInPresentationManager.swift in Sources */,
+				CE564716275EFEF500549624 /* DailyDeathData.swift in Sources */,
 				CEA6743F273CDB0800D607A5 /* DayAxisValueFormatter.swift in Sources */,
 				CECDEDC6269D011300F67FC6 /* SceneDelegate.swift in Sources */,
 				CE5646472759B7BE00549624 /* SlideInPresentationController.swift in Sources */,
 				CECDEDF7269D028800F67FC6 /* APICaller.swift in Sources */,
+				CE564720275F002000549624 /* DailyTotalData.swift in Sources */,
 				CECDEDFC269D04C900F67FC6 /* BHError.swift in Sources */,
 				CE5646572759B97600549624 /* MenuVC.swift in Sources */,
 				CE5646662759B9F200549624 /* MenuVCTableViewCell.swift in Sources */,
