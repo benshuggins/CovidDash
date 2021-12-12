@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableHeaderDev: UITableViewHeaderFooterView, UITableViewDelegate {
+class LeftTableHeaderCell: UITableViewHeaderFooterView, UITableViewDelegate {
     
     static let identifier = "TableHeaderDev"
     
@@ -46,16 +46,17 @@ class TableHeaderDev: UITableViewHeaderFooterView, UITableViewDelegate {
 }
 
 
-class DeveloperMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-   
-    static let developerMenuVC = DeveloperMenuVC()
+
+class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let data = ["LinkedIn", "Github", "Contact", "Github"]
+   
+    static let developerMenuVC = LeftMenuVC()
+    let data = ["Get Code: Github", "API Used: Covid19api.com", "Contact", "Github"]
     
     let tableView: UITableView = {
         let table = UITableView()
-        table.register(DeveloperMenuTableViewCell.self, forCellReuseIdentifier: DeveloperMenuTableViewCell.identifier)
-        table.register(TableHeaderDev.self, forHeaderFooterViewReuseIdentifier: "header")
+        table.register(LeftMenuTVCell.self, forCellReuseIdentifier: LeftMenuTVCell.identifier)
+        table.register(LeftTableHeaderCell.self, forHeaderFooterViewReuseIdentifier: "header")
         return table
     }()
     
@@ -65,7 +66,6 @@ class DeveloperMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        
         self.view.layer.cornerRadius = 20
         self.view.layer.masksToBounds = true
     }
@@ -80,20 +80,26 @@ class DeveloperMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: DeveloperMenuTableViewCell.identifier) as! DeveloperMenuTableViewCell
-        let data1 = data[indexPath.row]
-        cell.data = data1
+        let cellData = data[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: LeftMenuTVCell.identifier) as! LeftMenuTVCell
+        //cell.configure(with: "Cell #: \(indexPath.row)")
+        cell.data = cellData
+        cell.delegate = self
         return cell
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? TableHeaderDev
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? LeftTableHeaderCell
         return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 200
     }
+}
 
-
+extension LeftMenuVC: LeftMenuButtonActionDelegate {
+    func didTapButton(data: String) {
+        print("Did recieve button tap from: \(data) ")
+    }
 }

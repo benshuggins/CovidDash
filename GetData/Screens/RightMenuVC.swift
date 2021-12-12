@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableHeader: UITableViewHeaderFooterView, UITableViewDelegate {
+class RightTableHeaderCell: UITableViewHeaderFooterView, UITableViewDelegate {
     
     static let identifier = "TableHeader"
     
@@ -51,16 +51,16 @@ class TableHeader: UITableViewHeaderFooterView, UITableViewDelegate {
     }
 }
    // Need to add CustomTableViewCell
-class MenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RightMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
-    static let menuVC = MenuVC()
+    static let menuVC = RightMenuVC()
     
     let data = ["Go To: www.covid19.com", "How to use App", "Sources", "Github"]
     
     let tableView: UITableView = {
         let table = UITableView()
-        table.register(MenuVCTableViewCell.self, forCellReuseIdentifier: MenuVCTableViewCell.identifier)
-        table.register(TableHeader.self, forHeaderFooterViewReuseIdentifier: "header")
+        table.register(RightMenuTVCell.self, forCellReuseIdentifier: RightMenuTVCell.identifier)
+        table.register(RightTableHeaderCell.self, forHeaderFooterViewReuseIdentifier: "header")
         return table
     }()
 
@@ -90,14 +90,14 @@ class MenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: MenuVCTableViewCell.identifier, for: indexPath) as? MenuVCTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: RightMenuTVCell.identifier, for: indexPath) as? RightMenuTVCell
         cell?.textLabel?.text = "hello word"
         
         return cell!
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? TableHeader
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? RightTableHeaderCell
         return header
     }
     

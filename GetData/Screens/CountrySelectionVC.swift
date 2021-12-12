@@ -7,8 +7,8 @@ import UIKit
 
 class CountrySelectionVC: UIViewController {
 
-    let menuVC = MenuVC()
-    let developerMenuVC = DeveloperMenuVC()
+    let menuVC = RightMenuVC()
+    let developerMenuVC = LeftMenuVC()
     private var slideInTransitionDelegate: SlideInPresentationManager!
     var isSearching = false
     let searchBar = UISearchBar()
@@ -58,7 +58,7 @@ class CountrySelectionVC: UIViewController {
     }
 
     @objc func rightBarButtonTapped() {
-        let controller = MenuVC()
+        let controller = RightMenuVC()
         slideInTransitionDelegate = SlideInPresentationManager()
         slideInTransitionDelegate.direction = .right
         controller.modalPresentationStyle = .custom
@@ -68,7 +68,7 @@ class CountrySelectionVC: UIViewController {
     }
     
     @objc func leftBarButtonTapped() {
-        let controller2 = DeveloperMenuVC()
+        let controller2 = LeftMenuVC()
         slideInTransitionDelegate = SlideInPresentationManager()
         slideInTransitionDelegate.direction = .left
         controller2.modalPresentationStyle = .custom

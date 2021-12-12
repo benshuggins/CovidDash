@@ -3,9 +3,14 @@
 //  GetData
 //
 //  Created by Ben Huggins on 7/12/21.
-// FREE API I AM USING: "https://covid19api.com/"
+// FREE API I AM USING: "https://covid19api.com/" here is anther free covid api ios academy used: //  https://covidtracking.com/data
 
-import Foundation  //  https://covidtracking.com/data
+// Three to query by scope (Italy)
+//https://api.covid19api.com/country/IT/status/deaths    // DEATHS
+//https://api.covid19api.com/country/IT/status/confirmed // TOTAL CASES
+//https://api.covid19api.com/country/IT/status/recovered // RECOVERED
+
+import Foundation
 
 var index2 = 0
 
@@ -43,10 +48,7 @@ class APICaller {
         }
         task.resume()
     }
-    // Three to query by scope (Italy)
-    //https://api.covid19api.com/country/IT/status/deaths    // DEATHS
-    //https://api.covid19api.com/country/IT/status/confirmed // TOTAL CASES
-    //https://api.covid19api.com/country/IT/status/recovered // RECOVERED
+    
     func getCountryDeathStatus(iso: String, scope: String, completion: @escaping (Result<[DailyDeathData], BHError>) -> Void ) {
         let baseURL = "https://api.covid19api.com/country/\(iso)/status/\(scope)"
         guard let url = URL(string: baseURL) else {return}

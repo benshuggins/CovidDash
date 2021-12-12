@@ -7,16 +7,20 @@
 
 import UIKit
 
-class DeveloperMenuTableViewCell: UITableViewCell {
-    
-    
-       var data = String() {
-           didSet{
-               print("Data cell: \(data)")
-           }
-       }
-       
+protocol LeftMenuButtonActionDelegate: AnyObject {
+    func didTapButton(data: String)
+}
 
+class LeftMenuTVCell: UITableViewCell {
+    
+    public weak var delegate: LeftMenuButtonActionDelegate?
+    private var string: String?
+
+    public func configure(with string: String) {
+        self.string = string
+    }
+    
+    var data = String()
     static let identifier = "DeveloperMenuTableViewCell"
     
     let uiView: UIView = {
@@ -27,42 +31,36 @@ class DeveloperMenuTableViewCell: UITableViewCell {
     let label: UILabel = {
        let label = UILabel()
         return label
-        
     }()
     
+    private let button = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-       // contentView.backgroundColor = .brown
-        //contentView.addSubview(uiView)
-      //  contentView.addSubview(label)
-       
-        
-        contentView.layer.cornerRadius = 12
-        
+     contentView.layer.cornerRadius = 12
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-  
-    
+    @objc private func didTapButton() {
+        //guard let string = string else {return}
+        delegate?.didTapButton(data: data)
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        contentView.addSubview(button)
         contentView.addSubview(label)
+        
+        button.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
+        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         label.text = data
         label.frame = contentView.bounds
-//        uiView.frame = CGRect(x: 10, y: 5, width: contentView.frame.size.width-20, height: contentView.frame.size.height-25)
-//        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10))
-        
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
-   
 }

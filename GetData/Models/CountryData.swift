@@ -5,9 +5,9 @@
 //  Created by Ben Huggins on 12/6/21.
 //
 
-// This is the second DataModel it returns Confirmed, Recovered, and Deaths for a given country
+// This is the second DataModel it returns Confirmed, Recovered, and Deaths for a given country. It populates the CountryDetailViewController
 
-// The next three viewModels used for the three line graghs (Total Cases, Recovered Cases, Deaths Cases) are constructed using this model. 
+// The next three viewModels used for the three line graghs (Total Cases, Recovered Cases, Deaths Cases) are constructed using this model. This follows MVVM architecture pattern.
 
 import Foundation
 

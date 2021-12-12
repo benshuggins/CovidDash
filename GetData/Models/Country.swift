@@ -5,7 +5,7 @@
 //  Created by Ben Huggins on 12/6/21.
 //
 
-// This is the first dataModel that is queried. It returns the names and iso values for all countries in the api.
+// This is the first dataModel that is queried. It returns the names and iso values for all countries in the api. This model populates the CountrySelectionVC.
 
 import Foundation
 

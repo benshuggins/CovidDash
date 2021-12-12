@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MenuVCTableViewCell: UITableViewCell {
+class RightMenuTVCell: UITableViewCell {
     
     static let identifier = "MenuVCTableViewCell"
     
