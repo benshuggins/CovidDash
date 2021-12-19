@@ -6,44 +6,44 @@
 //
 
 import UIKit
-//
-//class LeftTableHeaderCell: UITableViewHeaderFooterView, UITableViewDelegate {
-//    
-//    static let identifier = "TableHeaderDev"
-//    
-//    private let imageView: UIImageView = {
-//      let imageView = UIImageView()
-//        imageView.contentMode = .scaleAspectFill
-//        imageView.image = UIImage(named: "benImage")
-//      return imageView
-//    }()
-//    
-//    private let label: UILabel = {
-//        let label = UILabel()
-//        label.text = "Api Used:"
-//        label.font = .systemFont(ofSize: 22, weight: .semibold)
-//        label.textAlignment = .center
-//        return label
-//    }()
-//    
-//    override init(reuseIdentifier: String?) {
-//        super.init(reuseIdentifier: reuseIdentifier)
-//        //contentView.addSubview(label)
-//        contentView.addSubview(imageView)
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        label.sizeToFit()
-//        label.frame = CGRect(x: 0, y: contentView.frame.size.height-10-label.frame.size.height, width: contentView.frame.size.width, height: contentView.frame.size.height)
-//        
-//        imageView.frame = CGRect(x: 0, y: 40, width: contentView.frame.size.width, height: contentView.frame.size.height-15-label.frame.size.height+180)
-//    }
-//}
+
+class LeftTableHeaderCell: UITableViewHeaderFooterView, UITableViewDelegate {
+
+    static let identifier = "TableHeaderDev"
+
+    private let imageView: UIImageView = {
+      let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "benImage")
+      return imageView
+    }()
+
+    private let label: UILabel = {
+        let label = UILabel()
+        label.text = "Api Used:"
+        label.font = .systemFont(ofSize: 22, weight: .semibold)
+        label.textAlignment = .center
+        return label
+    }()
+
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(label)
+        contentView.addSubview(imageView)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        label.sizeToFit()
+        label.frame = CGRect(x: 0, y: contentView.frame.size.height-10-label.frame.size.height, width: contentView.frame.size.width, height: contentView.frame.size.height)
+
+        imageView.frame = CGRect(x: 0, y: 40, width: contentView.frame.size.width, height: contentView.frame.size.height-15-label.frame.size.height+180)
+    }
+}
 
 class LeftMenuVC: UIViewController {
     
@@ -53,6 +53,7 @@ class LeftMenuVC: UIViewController {
     let tableView: UITableView = {
        let table = UITableView()
         table.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        table.register(RightTableHeaderCell.self, forHeaderFooterViewReuseIdentifier: "header")
         return table
     }()
     
@@ -62,6 +63,8 @@ class LeftMenuVC: UIViewController {
         tableView.frame = view.bounds
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        
         
         
         //Large Titles for iOS 13/14
@@ -109,8 +112,14 @@ class LeftMenuVC: UIViewController {
                     return sectionContent[0].count
                 }
             }
-            
-             func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+            func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+                let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? LeftTableHeaderCell
+                return header
+        }
+        
+
+            func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
                     
                 return sectionTitles[section]  // section 0 is the 1st section
             }
@@ -120,39 +129,22 @@ class LeftMenuVC: UIViewController {
             //cell.accessoryType = .disclosureIndicator
                 // Configure the cell...array of content within array of headers
                 cell.textLabel?.text = sectionContent[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
-                var imageFileName:String!
                 
                 switch (indexPath as NSIndexPath).section {
                     
                 case 0:  // Section 0 Setup
                     cell.accessoryType = .disclosureIndicator
-                    imageFileName = "Folder-Colored"
-                    switch (indexPath as NSIndexPath).row {
-                    case 0: imageFileName = "SettingsICloud"
-                    case 1: imageFileName = "SettingsDataIntegrity"
-                    default: imageFileName = "SettingsDefault"
-                    }
-                    
+                   
                 case 1: // section 1 Support
-                    switch (indexPath as NSIndexPath).row {
-                    case 0: imageFileName = "SettingsAppInfo"
-                    case 1: imageFileName = "SettingsCredits"
-                    case 2: imageFileName = "SettingsPrivacy"
-                    case 3: imageFileName = "SettingsBlog"
-                    default: imageFileName = "SettingsDefault" }
+                    cell.accessoryType = .none
                     
                 case 2:  // Section 0 Setup
                     cell.accessoryType = .disclosureIndicator
-                    imageFileName = "Folder-Colored"
-                    switch (indexPath as NSIndexPath).row {
-                    case 0: imageFileName = "SettingsICloud"
-                    case 1: imageFileName = "SettingsDataIntegrity"
-                    default: imageFileName = "SettingsDefault"
-                    }
+
         default: break
                 }
                         
-                cell.imageView?.image = UIImage(named: imageFileName)
+             //   cell.imageView?.image = UIImage(named: imageFileName)
                 return cell
             }
         

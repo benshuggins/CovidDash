@@ -165,4 +165,12 @@ extension DateFormatter {
     }()
 }
 
+extension NumberFormatter {
+    static let numberFormatter: NumberFormatter = {
+       let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+}
+
 

@@ -132,8 +132,10 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
                l.yEntrySpace = 0
                l.yOffset = 5
         
+        
         let legend = chart.legend
          legend.font = UIFont(name: "Verdana", size: 18.0)!
+        
    
         //**************    Daily Death Data
         var entriesDeath: [ChartDataEntry] = []
@@ -191,6 +193,8 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
         f.dateStyle = .short
     chart.xAxis.valueFormatter = DateValueFormatter(formatter: f)
         
+        chart.rightYAxisRenderer.axis?.enabled = false // removes yaxis right side key
+        
         let data = LineChartData(dataSet: set1)
         data.addDataSet(set2)
         data.addDataSet(set3)
@@ -223,7 +227,7 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
         let dataRecovered = dailyRecoveredData[indexPath.row]
         let dataTotal = dailyTotalData[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = createText(with: dataDeath, dataRecovered: dataRecovered, dataTotal: dataTotal)
+        cell.textLabel?.attributedText = makeAttributedString(title: createText(with: dataDeath, dataRecovered: dataRecovered, dataTotal: dataTotal)!)
         return cell
     }
     
@@ -236,5 +240,13 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
         let dateString = DateFormatter.prettyFormatter.string(from: data)
         return "\(dateString)"
     }
-}
+    
+       private func makeAttributedString(title: String) -> NSAttributedString {
+                let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline), NSAttributedString.Key.foregroundColor: UIColor.purple]
+                let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
+                return titleString
+            }
+          
+    }
+
 
