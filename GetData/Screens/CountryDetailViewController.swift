@@ -210,9 +210,9 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
       
         customMarkerView.dateLabel.text =
             formatDateForMarker(with: dailyDeathData[entryIndex].dateDeath)
-        customMarkerView.deathCountLabel.text = "Deaths: \(dailyDeathData[entryIndex].casesDeath)"
-        customMarkerView.recoveredLabel.text = "Recovered: \(dailyRecoveredData[entryIndex].casesRecovered)"
-        customMarkerView.confirmedCasesLabel.text = "Confirmed: \(dailyTotalData[entryIndex].casesTotal)"
+        customMarkerView.deathCountLabel.text = "Deaths: \(dailyDeathData[entryIndex].casesDeath.withCommas())"
+        customMarkerView.recoveredLabel.text = "Recovered: \(dailyRecoveredData[entryIndex].casesRecovered.withCommas())"
+        customMarkerView.confirmedCasesLabel.text = "Confirmed: \(dailyTotalData[entryIndex].casesTotal.withCommas())"
     }
 }
 
@@ -249,4 +249,10 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
           
     }
 
-
+extension Int {
+    func withCommas() -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter.string(from: NSNumber(value:self))!
+    }
+}
