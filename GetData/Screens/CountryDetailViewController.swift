@@ -187,13 +187,16 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
     
     let xAxis = chart.xAxis
     xAxis.granularity = 1
+    
+       // chart.xAxisRenderer.axis?.enabled = false
 
-    // top X axis Styling
-    let f = DateFormatter()
-        f.dateStyle = .short
-    chart.xAxis.valueFormatter = DateValueFormatter(formatter: f)
+//    // top X axis Styling
+//    let f = DateFormatter()
+//        f.dateStyle = .short
+//    chart.xAxis.valueFormatter = DateValueFormatter(formatter: f)
         
         chart.rightYAxisRenderer.axis?.enabled = false // removes yaxis right side key
+        
         
         let data = LineChartData(dataSet: set1)
         data.addDataSet(set2)
@@ -241,12 +244,11 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
         return "\(dateString)"
     }
     
-       private func makeAttributedString(title: String) -> NSAttributedString {
-                let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline), NSAttributedString.Key.foregroundColor: UIColor.purple]
-                let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
-                return titleString
+    private func makeAttributedString(title: String) -> NSAttributedString {
+        let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline), NSAttributedString.Key.foregroundColor: UIColor.purple]
+        let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
+            return titleString
             }
-          
     }
 
 extension Int {

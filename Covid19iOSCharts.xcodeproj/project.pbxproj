@@ -24,7 +24,6 @@
 		CE564720275F002000549624 /* DailyTotalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56471F275F002000549624 /* DailyTotalData.swift */; };
 		CE5B6C2526EA856D00C6BE3E /* CustomMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */; };
 		CE5B6C2A26EA875100C6BE3E /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */; };
-		CEA6743F273CDB0800D607A5 /* DayAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */; };
 		CECDEDC4269D011300F67FC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDC3269D011300F67FC6 /* AppDelegate.swift */; };
 		CECDEDC6269D011300F67FC6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDC5269D011300F67FC6 /* SceneDelegate.swift */; };
 		CECDEDC8269D011300F67FC6 /* CountrySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDC7269D011300F67FC6 /* CountrySelectionVC.swift */; };
@@ -76,7 +75,6 @@
 		CE56471F275F002000549624 /* DailyTotalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTotalData.swift; sourceTree = "<group>"; };
 		CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMarkerView.xib; sourceTree = "<group>"; };
 		CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
-		CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAxisValueFormatter.swift; sourceTree = "<group>"; };
 		CECDEDC0269D011300F67FC6 /* Covid19iOSCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Covid19iOSCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECDEDC3269D011300F67FC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECDEDC5269D011300F67FC6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				CE5646342758A68B00549624 /* DateValueFormatter.swift */,
-				CEA6743E273CDB0800D607A5 /* DayAxisValueFormatter.swift */,
 				CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */,
 				CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */,
 			);
@@ -469,7 +466,6 @@
 				CECDEE06269D260800F67FC6 /* CountryDetailViewController.swift in Sources */,
 				CE56463F2759B79800549624 /* SlideInPresentationManager.swift in Sources */,
 				CE564716275EFEF500549624 /* DailyDeathData.swift in Sources */,
-				CEA6743F273CDB0800D607A5 /* DayAxisValueFormatter.swift in Sources */,
 				CECDEDC6269D011300F67FC6 /* SceneDelegate.swift in Sources */,
 				CE5646472759B7BE00549624 /* SlideInPresentationController.swift in Sources */,
 				CECDEDF7269D028800F67FC6 /* APICaller.swift in Sources */,
@@ -653,6 +649,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3DMFD3YYQW;
 				INFOPLIST_FILE = GetData/Info.plist;
@@ -663,7 +660,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.checklists.GetData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -673,6 +670,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3DMFD3YYQW;
 				INFOPLIST_FILE = GetData/Info.plist;
@@ -683,7 +681,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.checklists.GetData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

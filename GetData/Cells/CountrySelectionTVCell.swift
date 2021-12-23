@@ -4,6 +4,8 @@
 //
 //  Created by Ben Huggins on 7/12/21.
 //
+// App logo creator website: https://www.canva.com/design/DAEzPFdeChQ/QkYa3B3Rmi1pyR4yIsL4Aw/edit
+// app icon generator: https://appicon.co/
 
 import UIKit
 
