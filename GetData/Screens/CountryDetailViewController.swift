@@ -21,7 +21,7 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
     
     let tableView: UITableView = {
         let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(CountryDetailTVCell.self, forCellReuseIdentifier: CountryDetailTVCell.identifier)
         return table
     }()
     // data for the tableView and the Chart
@@ -132,11 +132,9 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
                l.yEntrySpace = 0
                l.yOffset = 5
         
-        
         let legend = chart.legend
          legend.font = UIFont(name: "Verdana", size: 18.0)!
         
-   
         //**************    Daily Death Data
         var entriesDeath: [ChartDataEntry] = []
         for index in 0..<dailyDeathData.count {
@@ -197,7 +195,6 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
         
         chart.rightYAxisRenderer.axis?.enabled = false // removes yaxis right side key
         
-        
         let data = LineChartData(dataSet: set1)
         data.addDataSet(set2)
         data.addDataSet(set3)
@@ -221,6 +218,10 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
 
 extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dailyDeathData.count
     }
@@ -229,26 +230,17 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
         let dataDeath = dailyDeathData[indexPath.row]
         let dataRecovered = dailyRecoveredData[indexPath.row]
         let dataTotal = dailyTotalData[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.attributedText = makeAttributedString(title: createText(with: dataDeath, dataRecovered: dataRecovered, dataTotal: dataTotal)!)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CountryDetailTVCell.identifier, for: indexPath) as! CountryDetailTVCell
+      
+        cell.configure(dataDeath: dataDeath, dataRecovered: dataRecovered, dataTotal: dataTotal)
+//       cell.textLabel?.attributedText = makeAttributedString(title: createText(with: dataDeath, dataRecovered: dataRecovered, dataTotal: dataTotal)!)
         return cell
-    }
-    
-    private func createText(with dataDeath: DailyDeathData, dataRecovered: DailyRecoveredData, dataTotal: DailyTotalData) -> String? {                       // return a tuple here
-        let dateString = DateFormatter.prettyFormatter.string(from: dataDeath.dateDeath)
-        return "\(dateString): Deaths: \(dataDeath.casesDeath), Recovered:\(dataRecovered.casesRecovered), Confirmed:\(dataTotal.casesTotal)"
     }
     
     private func formatDateForMarker(with data: Date) -> String? {
         let dateString = DateFormatter.prettyFormatter.string(from: data)
         return "\(dateString)"
-    }
-    
-    private func makeAttributedString(title: String) -> NSAttributedString {
-        let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline), NSAttributedString.Key.foregroundColor: UIColor.purple]
-        let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
-            return titleString
-            }
+        }
     }
 
 extension Int {

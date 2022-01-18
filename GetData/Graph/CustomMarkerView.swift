@@ -32,7 +32,7 @@ class CustomMarkerView: MarkerView {
         addSubview(contentView)
         
         contentView.layer.cornerRadius = 5
-        contentView.backgroundColor = .systemRed
+        contentView.backgroundColor = .red 
         
         self.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         self.offset = CGPoint(x: -(self.frame.width/2+150), y: -self.frame.height-200)

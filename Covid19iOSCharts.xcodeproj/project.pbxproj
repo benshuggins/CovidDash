@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04F8263DE88634FB8934BEA6 /* Pods_GetData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5280085A9D1B771CE37E90DA /* Pods_GetData.framework */; };
 		CE11677B270395590070F455 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11677A270395590070F455 /* SpinnerViewController.swift */; };
 		CE5646352758A68C00549624 /* DateValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5646342758A68B00549624 /* DateValueFormatter.swift */; };
 		CE56463F2759B79800549624 /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56463E2759B79800549624 /* SlideInPresentationManager.swift */; };
@@ -24,6 +23,7 @@
 		CE564720275F002000549624 /* DailyTotalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56471F275F002000549624 /* DailyTotalData.swift */; };
 		CE5B6C2526EA856D00C6BE3E /* CustomMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */; };
 		CE5B6C2A26EA875100C6BE3E /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */; };
+		CEB6A044277479E900FF2500 /* CountryDetailTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB6A043277479E900FF2500 /* CountryDetailTVCell.swift */; };
 		CECDEDC4269D011300F67FC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDC3269D011300F67FC6 /* AppDelegate.swift */; };
 		CECDEDC6269D011300F67FC6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDC5269D011300F67FC6 /* SceneDelegate.swift */; };
 		CECDEDC8269D011300F67FC6 /* CountrySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDC7269D011300F67FC6 /* CountrySelectionVC.swift */; };
@@ -36,6 +36,7 @@
 		CECDEDFC269D04C900F67FC6 /* BHError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEDFB269D04C900F67FC6 /* BHError.swift */; };
 		CECDEE01269D182300F67FC6 /* CountrySelectionTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEE00269D182300F67FC6 /* CountrySelectionTVCell.swift */; };
 		CECDEE06269D260800F67FC6 /* CountryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDEE05269D260800F67FC6 /* CountryDetailViewController.swift */; };
+		CECFBB1527868DD7009658B3 /* Pods_GetData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5280085A9D1B771CE37E90DA /* Pods_GetData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		CE56471F275F002000549624 /* DailyTotalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTotalData.swift; sourceTree = "<group>"; };
 		CE5B6C2426EA856D00C6BE3E /* CustomMarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMarkerView.xib; sourceTree = "<group>"; };
 		CE5B6C2926EA875100C6BE3E /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
+		CEB6A043277479E900FF2500 /* CountryDetailTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailTVCell.swift; sourceTree = "<group>"; };
 		CECDEDC0269D011300F67FC6 /* Covid19iOSCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Covid19iOSCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECDEDC3269D011300F67FC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECDEDC5269D011300F67FC6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04F8263DE88634FB8934BEA6 /* Pods_GetData.framework in Frameworks */,
+				CECFBB1527868DD7009658B3 /* Pods_GetData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				CECDEE00269D182300F67FC6 /* CountrySelectionTVCell.swift */,
+				CEB6A043277479E900FF2500 /* CountryDetailTVCell.swift */,
 				CE5646602759B9CD00549624 /* LeftMenuTVCell.swift */,
 				CE5646652759B9F200549624 /* RightMenuTVCell.swift */,
 			);
@@ -468,6 +471,7 @@
 				CE564716275EFEF500549624 /* DailyDeathData.swift in Sources */,
 				CECDEDC6269D011300F67FC6 /* SceneDelegate.swift in Sources */,
 				CE5646472759B7BE00549624 /* SlideInPresentationController.swift in Sources */,
+				CEB6A044277479E900FF2500 /* CountryDetailTVCell.swift in Sources */,
 				CECDEDF7269D028800F67FC6 /* APICaller.swift in Sources */,
 				CE564720275F002000549624 /* DailyTotalData.swift in Sources */,
 				CECDEDFC269D04C900F67FC6 /* BHError.swift in Sources */,
@@ -578,7 +582,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -633,7 +637,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

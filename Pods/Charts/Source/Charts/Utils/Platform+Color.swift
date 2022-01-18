@@ -17,7 +17,7 @@ private func fetchLabelColor() -> UIColor
 {
     if #available(iOS 13, tvOS 13, *)
     {
-        return .label
+        return .black
     }
     else
     {
