@@ -19,10 +19,6 @@ class CountryDetailTVCell: UITableViewCell {
     
     let deathLabel = UILabel()
     
-    
-    
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -34,8 +30,8 @@ class CountryDetailTVCell: UITableViewCell {
 //        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10))
         
         totalLabel.frame = CGRect(x: 100, y: 0, width: 300, height: 30)
-        deathLabel.frame = CGRect(x: 100, y: 30, width: 300, height: 30)
-        recoveredLabel.frame = CGRect(x: 100, y: 60, width: 300, height: 30)
+        recoveredLabel.frame = CGRect(x: 100, y: 30, width: 300, height: 30)
+        deathLabel.frame = CGRect(x: 100, y: 60, width: 300, height: 30)
         
     }
 
@@ -60,6 +56,7 @@ class CountryDetailTVCell: UITableViewCell {
             dateLabel.textColor = .black
             dateLabel.backgroundColor = .white
             dateLabel.layer.cornerRadius = 8
+            
         
         totalLabel.textColor = .black
         totalLabel.backgroundColor = .white
@@ -70,29 +67,25 @@ class CountryDetailTVCell: UITableViewCell {
         deathLabel.textColor = .black
         deathLabel.backgroundColor = .white
         
-        
-        
-      
     }
     
    
+    //       cell.textLabel?.attributedText = makeAttributedString(title: createText(with: dataDeath, dataRecovered: dataRecovered, dataTotal: dataTotal)!)
     
     func configure(dataDeath: DailyDeathData, dataRecovered: DailyRecoveredData, dataTotal: DailyTotalData) {
         
         let cellText = createText(with: dataDeath, dataRecovered: dataRecovered, dataTotal: dataTotal)
     
-        dateLabel.text = cellText?.first
-        totalLabel.text = cellText?[3]
-        recoveredLabel.text = cellText?[2]
-        deathLabel.text = cellText?[1]
+        dateLabel.attributedText = makeAttributedString(title: cellText?.first ?? "N/A")
+        totalLabel.attributedText = makeAttributedString(title: cellText?[3] ?? "N/A")
+        recoveredLabel.attributedText = makeAttributedString(title: cellText?[2] ?? "N/A")
+        deathLabel.attributedText = makeAttributedString(title: cellText?[1] ?? "N/A")
        
-        
-        
     }
     
-    private func createText(with dataDeath: DailyDeathData, dataRecovered: DailyRecoveredData, dataTotal: DailyTotalData) -> [String]? {                       // return a tuple here
+    private func createText(with dataDeath: DailyDeathData, dataRecovered: DailyRecoveredData, dataTotal: DailyTotalData) -> [String]? {                       
         let dateString = DateFormatter.prettyFormatter.string(from: dataDeath.dateDeath)
-        return ["\(dateString):"," Deaths: \(dataDeath.casesDeath)"," Recovered:\(dataRecovered.casesRecovered)"," Confirmed Cases:\(dataTotal.casesTotal)"]
+        return ["  \(dateString):"," Deaths: \(dataDeath.casesDeath.withCommas())"," Recovered: \(dataRecovered.casesRecovered.withCommas())"," Confirmed Cases: \(dataTotal.casesTotal.withCommas())"]
     }
     
     private func makeAttributedString(title: String) -> NSAttributedString {
@@ -100,11 +93,11 @@ class CountryDetailTVCell: UITableViewCell {
         let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
             return titleString
             }
-    
-   
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
 }
+
+

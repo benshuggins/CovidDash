@@ -233,7 +233,6 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: CountryDetailTVCell.identifier, for: indexPath) as! CountryDetailTVCell
       
         cell.configure(dataDeath: dataDeath, dataRecovered: dataRecovered, dataTotal: dataTotal)
-//       cell.textLabel?.attributedText = makeAttributedString(title: createText(with: dataDeath, dataRecovered: dataRecovered, dataTotal: dataTotal)!)
         return cell
     }
     
