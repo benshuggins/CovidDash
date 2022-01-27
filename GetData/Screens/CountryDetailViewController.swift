@@ -1,23 +1,15 @@
-//
 //  CountryDetailViewController.swift
-
-//"2021-07-13T00:00:00Z" need to format these dates to 07/13/2021
-
-//https://github.com/danielgindi/Charts   Charts API
-
 import UIKit
 import Charts
 
 class CountryDetailViewController: UIViewController, ChartViewDelegate {
-        
-   private let customMarkerView = CustomMarkerView() // Instance of CustomMarker
-  
+       
+    private let countryName: String
+    private let isoItem: String
+    private let customMarkerView = CustomMarkerView() // Instance of CustomMarker
     static let identifier = "CountryDetailViewController"
     
     lazy var chart = LineChartView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
-    
-    private let countryName: String
-    private let isoItem: String
     
     let tableView: UITableView = {
         let table = UITableView()
@@ -60,12 +52,26 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         getCountryData()
         view.backgroundColor = .white
-        title = "\(countryName.uppercased()) Covid Deaths"
+       // title = "\(countryName.uppercased()) Covid Metrics"
+        
+        
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.numberOfLines = 2
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.text = "\(countryName.uppercased()) Covid19 Metrics\n 1/21/20 to Present"
+        self.navigationItem.titleView = label
+        
+        
     }
     
     private func configureTableView() {
@@ -131,10 +137,9 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
                l.xEntrySpace = 7
                l.yEntrySpace = 0
                l.yOffset = 5
-        
-        let legend = chart.legend
-         legend.font = UIFont(name: "Verdana", size: 18.0)!
-        
+               l.font = UIFont(name: "Verdana", size: 18.0)!
+               l.textColor = .systemGray
+
         //**************    Daily Death Data
         var entriesDeath: [ChartDataEntry] = []
         for index in 0..<dailyDeathData.count {
@@ -179,21 +184,21 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
 
     chart.delegate = self
     chart.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .linear)
-   
-        customMarkerView.chartView = chart
+    customMarkerView.chartView = chart
     chart.marker = customMarkerView
     
     let xAxis = chart.xAxis
     xAxis.granularity = 1
-    
-       // chart.xAxisRenderer.axis?.enabled = false
-
+    xAxis.labelTextColor = .systemGray
+ 
 //    // top X axis Styling
 //    let f = DateFormatter()
 //        f.dateStyle = .short
 //    chart.xAxis.valueFormatter = DateValueFormatter(formatter: f)
         
-        chart.rightYAxisRenderer.axis?.enabled = false // removes yaxis right side key
+        chart.rightYAxisRenderer.axis?.enabled = true // removes yaxis right side key
+        chart.leftAxis.labelTextColor = .systemGray
+        chart.rightAxis.labelTextColor = .systemGray
         
         let data = LineChartData(dataSet: set1)
         data.addDataSet(set2)
@@ -207,7 +212,6 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         guard let dataSet = chartView.data?.dataSets[highlight.dataSetIndex] else { return }
         let entryIndex = dataSet.entryIndex(entry: entry)
-      
         customMarkerView.dateLabel.text =
             formatDateForMarker(with: dailyDeathData[entryIndex].dateDeath)
         customMarkerView.deathCountLabel.text = "Deaths: \(dailyDeathData[entryIndex].casesDeath.withCommas())"
@@ -231,7 +235,6 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
         let dataRecovered = dailyRecoveredData[indexPath.row]
         let dataTotal = dailyTotalData[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: CountryDetailTVCell.identifier, for: indexPath) as! CountryDetailTVCell
-      
         cell.configure(dataDeath: dataDeath, dataRecovered: dataRecovered, dataTotal: dataTotal)
         return cell
     }
@@ -242,10 +245,3 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
 
-extension Int {
-    func withCommas() -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        return numberFormatter.string(from: NSNumber(value:self))!
-    }
-}
