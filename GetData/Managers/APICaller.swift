@@ -38,7 +38,7 @@ class APICaller {
                     var result = try? JSONDecoder().decode([Country].self, from: data)
                     
                     guard var resultFinal = result?.sorted() else {return}
-                    resultFinal.removeAll(where: { $0.iso == "AX" || $0.iso == "AW" || $0.iso == "BL"  || $0.iso == "BM" || $0.iso == "EH" || $0.iso == "AS" || $0.iso == "AI" || $0.iso == "IO" || $0.iso == "VG" || $0.iso == "BV"})
+                    resultFinal.removeAll(where: { $0.iso == "AX" || $0.iso == "AW" || $0.iso == "BL"  || $0.iso == "BM" || $0.iso == "EH" || $0.iso == "AS" || $0.iso == "AI" || $0.iso == "IO" || $0.iso == "VG" || $0.iso == "BV" || $0.iso == "AU"})
                     
                     completion(.success(resultFinal))
                 } catch {

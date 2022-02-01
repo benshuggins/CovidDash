@@ -78,7 +78,7 @@ class CountrySelectionVC: UIViewController {
     }
 
     func getCountryName() {
-        //createSpinnerView()
+        createSpinnerView()
         APICaller.shared.getCountryNames { [weak self] result in
             switch result {
             case .success(let countries):
@@ -89,21 +89,21 @@ class CountrySelectionVC: UIViewController {
         }
     }
     
-//    func createSpinnerView() {
-//        let child = SpinnerViewController()
-//        addChild(child)
-//        child.view.frame = view.frame
-//        view.addSubview(child.view)
-//        child.didMove(toParent: self)
-//
-//        // wait two seconds to simulate some work happening
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//            // then remove the spinner view controller
-//            child.willMove(toParent: nil)
-//            child.view.removeFromSuperview()
-//            child.removeFromParent()
-//        }
-//    }
+    func createSpinnerView() {
+        let child = SpinnerViewController()
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+
+        // wait two seconds to simulate some work happening
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            // then remove the spinner view controller
+            child.willMove(toParent: nil)
+            child.view.removeFromSuperview()
+            child.removeFromParent()
+        }
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -140,7 +140,7 @@ extension CountrySelectionVC: UITableViewDelegate, UITableViewDataSource {
             let iso = selectedRow.iso
             let secondVC = CountryDetailViewController(countryName: name, isoItem: iso)
             present(UINavigationController(rootViewController: secondVC), animated: true)
-           // createSpinnerView()
+            createSpinnerView()
         } else {
             let selectedRow = countries[indexPath.row]
             print("Row Number: \(selectedRow)")
@@ -148,7 +148,7 @@ extension CountrySelectionVC: UITableViewDelegate, UITableViewDataSource {
             let iso = selectedRow.iso
             let secondVC = CountryDetailViewController(countryName: name, isoItem: iso)
             present(UINavigationController(rootViewController: secondVC), animated: true)
-          //  createSpinnerView()
+            createSpinnerView()
         }
     }
 }

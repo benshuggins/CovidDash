@@ -4,7 +4,6 @@
 //
 //  Created by Ben Huggins on 12/23/21.
 
-
 import UIKit
 
 class CountryDetailTVCell: UITableViewCell {
@@ -22,11 +21,6 @@ class CountryDetailTVCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-//        dateLabel.frame = CGRect(x: 0, y: 0, width: 100, height: contentView.frame.size.height)
-//        totalLabel.frame = CGRect(x: 100, y: 0, width: 300, height: 30)
-//        recoveredLabel.frame = CGRect(x: 100, y: 30, width: 300, height: 30)
-//        deathLabel.frame = CGRect(x: 100, y: 60, width: 300, height: 30)
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -53,27 +47,27 @@ class CountryDetailTVCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureDateLabel() {
+   private func configureDateLabel() {
         dateLabel.textColor = .black
-        dateLabel.backgroundColor = .white
+      //  dateLabel.backgroundColor = .white
         dateLabel.adjustsFontSizeToFitWidth = true
     }
     
-    func configureTotalCasesLabel() {
+   private func configureTotalCasesLabel() {
         totalLabel.textColor = .black
-        totalLabel.backgroundColor = .white
+        //totalLabel.backgroundColor = .white
         totalLabel.adjustsFontSizeToFitWidth = true
     }
     
-    func configureRocoveredCasesLabel() {
+   private func configureRocoveredCasesLabel() {
         recoveredLabel.textColor = .black
-        recoveredLabel.backgroundColor = .white
+      //  recoveredLabel.backgroundColor = .white
         recoveredLabel.adjustsFontSizeToFitWidth = true
     }
     
-    func configureDeathLabel() {
+   private func configureDeathLabel() {
         deathLabel.textColor = .black
-        deathLabel.backgroundColor = .white
+       // deathLabel.backgroundColor = .white
         deathLabel.adjustsFontSizeToFitWidth = true
     }
     
@@ -123,7 +117,7 @@ class CountryDetailTVCell: UITableViewCell {
     }
     
  func makeAttributedString(title: String) -> NSAttributedString {
-        let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline), NSAttributedString.Key.foregroundColor: UIColor.purple]
+        let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline), NSAttributedString.Key.foregroundColor: UIColor.systemGray]
         let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
             return titleString
             }
