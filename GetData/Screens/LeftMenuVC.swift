@@ -63,6 +63,8 @@ class LeftMenuVC: UIViewController {
         tableView.frame = view.bounds
         tableView.delegate = self
         tableView.dataSource = self
+        self.view.layer.cornerRadius = 20
+        self.view.layer.masksToBounds = true
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         

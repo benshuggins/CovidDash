@@ -13,6 +13,8 @@ protocol LeftMenuButtonActionDelegate: AnyObject {
 
 class LeftMenuTVCell: UITableViewCell {
     
+    private let button = UIButton()
+    
     public weak var delegate: LeftMenuButtonActionDelegate?
     private var string: String?
 
@@ -33,11 +35,17 @@ class LeftMenuTVCell: UITableViewCell {
         return label
     }()
     
-    private let button = UIButton()
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+ 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = .systemGray
      contentView.layer.cornerRadius = 12
+        contentView.addSubview(uiView)
+    
     }
 
     required init?(coder: NSCoder) {
@@ -60,7 +68,5 @@ class LeftMenuTVCell: UITableViewCell {
         label.frame = contentView.bounds
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+  
 }

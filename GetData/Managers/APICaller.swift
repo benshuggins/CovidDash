@@ -35,10 +35,10 @@ class APICaller {
             else if let data = data {
                 //dump(data)
                 do {
-                    var result = try? JSONDecoder().decode([Country].self, from: data)
+                    let result = try? JSONDecoder().decode([Country].self, from: data)
                     
                     guard var resultFinal = result?.sorted() else {return}
-                    resultFinal.removeAll(where: { $0.iso == "AX" || $0.iso == "AW" || $0.iso == "BL"  || $0.iso == "BM" || $0.iso == "EH" || $0.iso == "AS" || $0.iso == "AI" || $0.iso == "IO" || $0.iso == "VG" || $0.iso == "BV" || $0.iso == "AU"})
+                    resultFinal.removeAll(where: { $0.iso == "AX" || $0.iso == "AW" || $0.iso == "BL"  || $0.iso == "BM" || $0.iso == "EH" || $0.iso == "AS" || $0.iso == "AI" || $0.iso == "IO" || $0.iso == "VG" || $0.iso == "BV" || $0.iso == "AU" || $0.iso == "FR" || $0.iso == "UK"})
                     
                     completion(.success(resultFinal))
                 } catch {

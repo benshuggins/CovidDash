@@ -19,50 +19,54 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="271" height="305"/>
+            <rect key="frame" x="0.0" y="0.0" width="278" height="305"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RU8-2N-NTZ" userLabel="Content View">
-                    <rect key="frame" x="50.5" y="97.5" width="170" height="110"/>
+                    <rect key="frame" x="44" y="97.5" width="190" height="110"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Z9U-Bc-LJ8">
-                            <rect key="frame" x="5" y="0.0" width="160" height="103.5"/>
+                            <rect key="frame" x="5" y="0.0" width="180" height="103.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Covid Cases" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFd-D0-Ozs">
-                                    <rect key="frame" x="0.0" y="0.0" width="160" height="21.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="180" height="21.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KbU-Wd-uFG">
-                                    <rect key="frame" x="0.0" y="21.5" width="160" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="21.5" width="180" height="20.5"/>
                                     <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# Total Cases" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8i-mk-KYX">
-                                    <rect key="frame" x="0.0" y="42" width="160" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="42" width="180" height="20.5"/>
                                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# Recovered" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYC-fY-hbl">
-                                    <rect key="frame" x="0.0" y="62.5" width="160" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="62.5" width="180" height="20.5"/>
                                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# Deaths" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drP-8d-jnb">
-                                    <rect key="frame" x="0.0" y="83" width="160" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="83" width="180" height="20.5"/>
                                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="170" id="tpW-Df-4Lw"/>
+                                <constraint firstAttribute="width" constant="180" id="zr3-xL-o1J"/>
+                            </constraints>
                         </stackView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemPurpleColor"/>
@@ -85,7 +89,7 @@
                 <constraint firstItem="RU8-2N-NTZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wkZ-HW-ppc"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="34.057971014492757" y="312.38839285714283"/>
+            <point key="canvasLocation" x="39.130434782608695" y="312.38839285714283"/>
         </view>
     </objects>
     <resources>

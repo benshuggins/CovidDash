@@ -4,18 +4,32 @@
 //  Created by Ben Huggins on 7/12/21.
 
 import UIKit
+import AuthenticationServices
 
 class CountrySelectionVC: UIViewController {
 
     let menuVC = RightMenuVC()
     let developerMenuVC = LeftMenuVC()
     private var slideInTransitionDelegate: SlideInPresentationManager!
-    var isSearching = false
+    private var isSearching = false
     let searchBar = UISearchBar()
+    
+   var userIdentifierLabel = ""
+   var givenNameLabel = ""
+   var familyNameLabel = ""
+   var emailLabel = ""
+    
+    private let label: UILabel = {
+        let label = UILabel()
+        label.text = "Api Used:"
+        label.font = .systemFont(ofSize: 22, weight: .semibold)
+        label.textAlignment = .center
+        return label
+    }()
+
  
     var countries: [Country] = [] {
         didSet {
-           
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -37,7 +51,9 @@ class CountrySelectionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "COVID19"
+        //title = KeychainItem.currentUserIdentifier
+        title = "Countries"
+        
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
@@ -47,7 +63,7 @@ class CountrySelectionVC: UIViewController {
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
         search.obscuresBackgroundDuringPresentation = false
-        search.searchBar.placeholder = "Enter Country"
+        search.searchBar.placeholder = "Search for a Country"
         navigationItem.searchController = search
         
         let rightBarButtonItem = UIBarButtonItem(title: "About", style: .done, target: self, action: #selector(rightBarButtonTapped))
@@ -58,13 +74,19 @@ class CountrySelectionVC: UIViewController {
     }
 
     @objc func rightBarButtonTapped() {
-        let controller = RightMenuVC()
-        slideInTransitionDelegate = SlideInPresentationManager()
-        slideInTransitionDelegate.direction = .right
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = slideInTransitionDelegate
-        present(controller, animated: true, completion: nil)
-        print("RIGHT BAR BUTTON WAS TAPPED")
+        KeychainItem.deleteUserIdentifierFromKeychain()
+        
+        DispatchQueue.main.async {
+            self.showLoginViewController()
+        }
+        print("Sign Out Button Was Pressed")
+//        let controller = RightMenuVC()
+//        slideInTransitionDelegate = SlideInPresentationManager()
+//        slideInTransitionDelegate.direction = .right
+//        controller.modalPresentationStyle = .custom
+//        controller.transitioningDelegate = slideInTransitionDelegate
+//        present(controller, animated: true, completion: nil)
+//          print("RIGHT BAR BUTTON WAS TAPPED")
     }
     
     @objc func leftBarButtonTapped() {
