@@ -9,28 +9,38 @@ import UIKit
 import AuthenticationServices
 
 class LoginViewController: UIViewController {
-    // This is the Sign in with Apple Button (not slide up from bottom overlay)
     
+    private let appleSignInButton = ASAuthorizationAppleIDButton()
     let countrySelectionVC = CountrySelectionVC()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupProviderLoginView()
+        view.addSubview(appleSignInButton)
+        appleSignInButton.addTarget(self, action: #selector(didTapSignInButton), for: .touchUpInside)
     }
     
-    @IBOutlet weak var loginProviderStackView: UIStackView!
+    @objc func didTapSignInButton() {
+        let provider = ASAuthorizationAppleIDProvider()
+        let request = provider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         performExistingAccountSetupFlows()
     }
     
-    /// - Tag: add_appleid_button
-    func setupProviderLoginView() {
-        let authorizationButton = ASAuthorizationAppleIDButton()
-        authorizationButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
-        self.loginProviderStackView.addArrangedSubview(authorizationButton)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        appleSignInButton.frame = CGRect(x: 0, y: 0, width: 250, height: 250)
+        appleSignInButton.center = view.center
     }
-    
+
     // - Tag: perform_appleid_password_request
     /// Prompts the user if an existing iCloud Keychain credential or Apple ID credential is found.
     func performExistingAccountSetupFlows() {
@@ -40,19 +50,6 @@ class LoginViewController: UIViewController {
         
         // Create an authorization controller with the given requests.
         let authorizationController = ASAuthorizationController(authorizationRequests: requests)
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
-    }
-    
-    /// - Tag: perform_appleid_request
-    @objc
-    func handleAuthorizationAppleIDButtonPress() {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
@@ -77,7 +74,10 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             // This is where I jump to after logging in.
             let navController = UINavigationController(rootViewController: countrySelectionVC)
             navController.modalPresentationStyle = .fullScreen
-            self.present(navController, animated:true, completion: nil)
+           // self.present(navController, animated:true, completion: nil)
+            
+            
+            self.show(navController, sender: nil)
             
         
         case let passwordCredential as ASPasswordCredential:
@@ -146,13 +146,10 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
 }
 
 extension UIViewController {
-    
     func showLoginViewController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let loginViewController = storyboard.instantiateViewController(withIdentifier: "loginViewController") as? LoginViewController {
-            loginViewController.modalPresentationStyle = .formSheet
-            loginViewController.isModalInPresentation = true
-            self.present(loginViewController, animated: true, completion: nil)
+        let loginViewController = LoginViewController()
+        loginViewController.modalPresentationStyle = .fullScreen
+        self.navigationController?.present(loginViewController, animated: true)
         }
     }
-}
+

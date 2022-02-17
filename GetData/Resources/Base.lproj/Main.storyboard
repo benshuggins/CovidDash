@@ -24,30 +24,6 @@
             </objects>
             <point key="canvasLocation" x="2810.144927536232" y="51.5625"/>
         </scene>
-        <!--Login View Controller-->
-        <scene sceneID="xz1-KV-1xr">
-            <objects>
-                <viewController storyboardIdentifier="loginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="11w-g0-WZ1" customClass="LoginViewController" customModule="Covid19iOSCharts" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="KyR-7F-A8c">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TE4-bg-ocB">
-                                <rect key="frame" x="0.0" y="348" width="414" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="0Vr-60-nOR"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <connections>
-                        <outlet property="loginProviderStackView" destination="TE4-bg-ocB" id="Bft-6g-U8A"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="R0y-vd-vNq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1126" y="-639"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="YsR-Jp-zv2">
             <objects>

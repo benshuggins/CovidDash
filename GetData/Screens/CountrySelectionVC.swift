@@ -7,6 +7,8 @@ import UIKit
 import AuthenticationServices
 
 class CountrySelectionVC: UIViewController {
+    
+    let defaults = UserDefaults.standard
 
     let menuVC = RightMenuVC()
     let developerMenuVC = LeftMenuVC()
@@ -26,8 +28,7 @@ class CountrySelectionVC: UIViewController {
         label.textAlignment = .center
         return label
     }()
-
- 
+    
     var countries: [Country] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -51,9 +52,17 @@ class CountrySelectionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //title = KeychainItem.currentUserIdentifier
-        title = "Countries"
         
+        if defaults.bool(forKey: "First Launch") == true {
+            print("Second or more app launch")
+            defaults.set(true, forKey: "First Launch")
+        } else {
+            print("First Launch -- Open Sign In With Apple Screen")
+            showLoginViewController()
+            defaults.set(true, forKey: "First Launch")
+        }
+        
+        title = "Countries"
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
@@ -66,11 +75,11 @@ class CountrySelectionVC: UIViewController {
         search.searchBar.placeholder = "Search for a Country"
         navigationItem.searchController = search
         
-        let rightBarButtonItem = UIBarButtonItem(title: "About", style: .done, target: self, action: #selector(rightBarButtonTapped))
-        self.navigationItem.rightBarButtonItem  = rightBarButtonItem
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "text.alignright"), style: .done, target: self, action: #selector(rightBarButtonTapped))
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
 
-        let leftBarButtonItem = UIBarButtonItem(title: "Menu", style: .done, target: self, action: #selector(leftBarButtonTapped))
-        self.navigationItem.leftBarButtonItem  = leftBarButtonItem
+        let leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "text.alignleft"), style: .done, target: self, action: #selector(leftBarButtonTapped))
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem
     }
 
     @objc func rightBarButtonTapped() {
@@ -119,7 +128,7 @@ class CountrySelectionVC: UIViewController {
         child.didMove(toParent: self)
 
         // wait two seconds to simulate some work happening
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             // then remove the spinner view controller
             child.willMove(toParent: nil)
             child.view.removeFromSuperview()

@@ -11,13 +11,6 @@ class LeftTableHeaderCell: UITableViewHeaderFooterView, UITableViewDelegate {
 
     static let identifier = "TableHeaderDev"
 
-    private let imageView: UIImageView = {
-      let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "benImage")
-      return imageView
-    }()
-
     private let label: UILabel = {
         let label = UILabel()
         label.text = "Api Used:"
@@ -29,7 +22,6 @@ class LeftTableHeaderCell: UITableViewHeaderFooterView, UITableViewDelegate {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.addSubview(label)
-        contentView.addSubview(imageView)
     }
 
     required init?(coder: NSCoder) {
@@ -41,14 +33,13 @@ class LeftTableHeaderCell: UITableViewHeaderFooterView, UITableViewDelegate {
         label.sizeToFit()
         label.frame = CGRect(x: 0, y: contentView.frame.size.height-10-label.frame.size.height, width: contentView.frame.size.width, height: contentView.frame.size.height)
 
-        imageView.frame = CGRect(x: 0, y: 40, width: contentView.frame.size.width, height: contentView.frame.size.height-15-label.frame.size.height+180)
     }
 }
 
 class LeftMenuVC: UIViewController {
     
-    var sectionTitles = ["About this Demo App", "Developer", "hey"]
-        var sectionContent = [["Api Used: www.covid19api.com", "Get Code GitHub"],["Linkedin","Github","Email","Call"],["Linkedin","Github"]]
+    var sectionTitles = ["App", "Developer", ""]
+        var sectionContent = [["Api: Covid19api.com", "Get Repo: GitHub"],["Linkedin","Github"],["LOGOUT"]]
        
     let tableView: UITableView = {
        let table = UITableView()
@@ -105,11 +96,11 @@ class LeftMenuVC: UIViewController {
                 
                 switch section {
                 case 0:
-                    return sectionContent[0].count      // section 0 is the 1st/Top section 'Setup'
+                    return sectionContent[0].count      // section 0 is the 1st/Top section 'App'
                 case 1:
-                    return sectionContent[1].count      // section 1 is the 2nd section 'Support'
+                    return sectionContent[1].count      // section 1 is the 2nd section 'Developer'
                 case 2:
-                    return sectionContent[2].count      // section 2 is the 3rd section 'Socially Yours'
+                    return sectionContent[2].count      // section 2 is the 3rd section 'Logout'
                 default:
                     return sectionContent[0].count
                 }
@@ -120,7 +111,6 @@ class LeftMenuVC: UIViewController {
                 return header
         }
         
-
             func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
                     
                 return sectionTitles[section]  // section 0 is the 1st section
@@ -134,19 +124,17 @@ class LeftMenuVC: UIViewController {
                 
                 switch (indexPath as NSIndexPath).section {
                     
-                case 0:  // Section 0 Setup
+                case 0:  // Section 0 App
                     cell.accessoryType = .disclosureIndicator
                    
-                case 1: // section 1 Support
+                case 1: // Section 1 Developer
                     cell.accessoryType = .none
                     
-                case 2:  // Section 0 Setup
-                    cell.accessoryType = .disclosureIndicator
-
+                case 2:  // Section 2 Logout
+                    cell.accessoryType = .none
+                
         default: break
                 }
-                        
-             //   cell.imageView?.image = UIImage(named: imageFileName)
                 return cell
             }
         
@@ -154,8 +142,10 @@ class LeftMenuVC: UIViewController {
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                 
         switch (indexPath as NSIndexPath).section {
-                    
-        case 0: // Section 0 Setup
+               
+         
+            // Section 0 App
+        case 0:
             switch (indexPath as NSIndexPath).row {
             case 0:
                 print("open an alertView")
@@ -167,34 +157,32 @@ class LeftMenuVC: UIViewController {
             default:
             print(#function, "Error in Switch")
             } // end case section 0 switch
-                    
-        case 1: // section 1 Support
-        switch (indexPath as NSIndexPath).row {
-        case 0:
-            print("1")
-            if let url = URL(string: "https://www.covid19api.com") {
-                UIApplication.shared.open(url)
-            }
-        case 1:
-            print("1")
-             // performSegue(withIdentifier: "showCredits", sender: self)
-        case 2:
-            print("1")
-             // performSegue(withIdentifier: "showPrivacy", sender: self)
-        case 3:
-            print("1")
-             // performSegue(withIdentifier: "showBlog", sender: self)
-        default:
-            print("1")
-             // performSegue(withIdentifier: "showAppInfo", sender: self)
-        }
+                   
             
-        case 2: // Section 0 Setup
+            // section 1: Developer
+        case 1:
             switch (indexPath as NSIndexPath).row {
             case 0:
-               performSegue(withIdentifier: "showCloud", sender: self)
+                print("Linkedin Developer")
+                if let url = URL(string: "https://www.covid19api.com") {
+                UIApplication.shared.open(url)
+                }
             case 1:
-               performSegue(withIdentifier: "showDataIntegrityReset", sender: self)
+                print("Github Developer")
+           
+            default:
+                print("1")
+             // performSegue(withIdentifier: "showAppInfo", sender: self)
+            }
+            
+            
+        case 2: // Section 0 Logout
+            switch (indexPath as NSIndexPath).row {
+            case 0:
+              // performSegue(withIdentifier: "showCloud", sender: self)
+                DispatchQueue.main.async {
+                    self.showLoginViewController()
+                }
             default:
             print(#function, "Error in Switch")
             } // end
@@ -204,6 +192,8 @@ class LeftMenuVC: UIViewController {
                 
             tableView.deselectRow(at: indexPath, animated: true)
         }
+        
+        
         
         func showSimpleAlert() {
             let alert = UIAlertController(title: "The Point", message: "This Demo app compares how Covid19 has affected Countries of the World on 3 metrics: Total Cases, Total Recovered Cases, Total Deaths per day all Graphically", preferredStyle: .alert)
@@ -225,36 +215,32 @@ class LeftMenuVC: UIViewController {
               })
           }
         
-       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "showCloud":
-            print("1")
-       // _ = segue.destination as! CloudTableViewController
-        case "showDataIntegrityReset":
-      //  _ = segue.destination as! ResetDataIntegrityViewController
-            print("1")
-        case "showAppInfo":
-      //  let appInfoViewController = segue.destination as! AppInfoViewController
-      //  appInfoViewController.title = "AppsGym Books Info"
-            print("1")
-        case "showCredits":
-      //  _ = segue.destination as! CreditsViewController
-            print("1")
-        case "showPrivacy":
-            print("1")
-      //  _ = segue.destination as! PrivacyViewController
-        case "showBlog":
-            print("1")
-      //  _ = segue.destination as! BlogViewController
-        default:
-            print("default")
-       // _ = segue.destination as! SettingsTableViewController
-        }
-           
-           
-         
-               
+//       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        switch segue.identifier {
+//        case "showCloud":
+//            print("1")
+//       // _ = segue.destination as! CloudTableViewController
+//        case "showDataIntegrityReset":
+//      //  _ = segue.destination as! ResetDataIntegrityViewController
+//            print("1")
+//        case "showAppInfo":
+//      //  let appInfoViewController = segue.destination as! AppInfoViewController
+//      //  appInfoViewController.title = "AppsGym Books Info"
+//            print("1")
+//        case "showCredits":
+//      //  _ = segue.destination as! CreditsViewController
+//            print("1")
+//        case "showPrivacy":
+//            print("1")
+//      //  _ = segue.destination as! PrivacyViewController
+//        case "showBlog":
+//            print("1")
+//      //  _ = segue.destination as! BlogViewController
+//        default:
+//            print("default")
+//       // _ = segue.destination as! SettingsTableViewController
+//        }
         } // end class
-}
+
 
 
