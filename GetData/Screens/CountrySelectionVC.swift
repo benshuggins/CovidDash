@@ -85,17 +85,17 @@ class CountrySelectionVC: UIViewController {
     @objc func rightBarButtonTapped() {
         KeychainItem.deleteUserIdentifierFromKeychain()
         
-        DispatchQueue.main.async {
-            self.showLoginViewController()
-        }
-        print("Sign Out Button Was Pressed")
-//        let controller = RightMenuVC()
-//        slideInTransitionDelegate = SlideInPresentationManager()
-//        slideInTransitionDelegate.direction = .right
-//        controller.modalPresentationStyle = .custom
-//        controller.transitioningDelegate = slideInTransitionDelegate
-//        present(controller, animated: true, completion: nil)
-//          print("RIGHT BAR BUTTON WAS TAPPED")
+//        DispatchQueue.main.async {
+//            self.showLoginViewController()
+//        }
+//        print("Sign Out Button Was Pressed")
+        let controller = RightMenuVC()
+        slideInTransitionDelegate = SlideInPresentationManager()
+        slideInTransitionDelegate.direction = .right
+        controller.modalPresentationStyle = .custom
+        controller.transitioningDelegate = slideInTransitionDelegate
+        present(controller, animated: true, completion: nil)
+        print("RIGHT BAR BUTTON WAS TAPPED")
     }
     
     @objc func leftBarButtonTapped() {

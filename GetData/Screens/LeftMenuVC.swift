@@ -48,9 +48,13 @@ class LeftMenuVC: UIViewController {
         return table
     }()
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
+        //view.addSubview(logoutButton)
         tableView.frame = view.bounds
         tableView.delegate = self
         tableView.dataSource = self
@@ -59,6 +63,20 @@ class LeftMenuVC: UIViewController {
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         
+        
+        
+        let logoutButton = UIButton(type: .system) // let preferred over var here
+        logoutButton.setTitle("Log Out", for: .normal)
+        logoutButton.tintColor = .red
+        view.addSubview(logoutButton)
+        
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.topAnchor.constraint(equalTo: tableView.bottomAnchor).isActive = true
+        logoutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
+        logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
+        logoutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
+        
+
         
         //Large Titles for iOS 13/14
                 // Alternatively, check Storyboard NavigationBar 'PrefersLargeTitle'
@@ -83,6 +101,7 @@ class LeftMenuVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
+        
     }
     
 }
@@ -108,8 +127,10 @@ class LeftMenuVC: UIViewController {
         
             func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
                 let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? LeftTableHeaderCell
+                
                 return header
         }
+    
         
             func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
                     
@@ -132,6 +153,7 @@ class LeftMenuVC: UIViewController {
                     
                 case 2:  // Section 2 Logout
                     cell.accessoryType = .none
+                
                 
         default: break
                 }
