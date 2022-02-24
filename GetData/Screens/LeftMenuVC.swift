@@ -8,7 +8,8 @@
 import UIKit
 
 class LeftTableHeaderCell: UITableViewHeaderFooterView, UITableViewDelegate {
-
+    
+  
     static let identifier = "TableHeaderDev"
 
     private let label: UILabel = {
@@ -32,11 +33,14 @@ class LeftTableHeaderCell: UITableViewHeaderFooterView, UITableViewDelegate {
         super.layoutSubviews()
         label.sizeToFit()
         label.frame = CGRect(x: 0, y: contentView.frame.size.height-10-label.frame.size.height, width: contentView.frame.size.width, height: contentView.frame.size.height)
-
     }
 }
 
 class LeftMenuVC: UIViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+    }
     
     var sectionTitles = ["App", "Developer", ""]
         var sectionContent = [["Api: Covid19api.com", "Get Repo: GitHub"],["Linkedin","Github"],["LOGOUT"]]
@@ -47,9 +51,6 @@ class LeftMenuVC: UIViewController {
         table.register(RightTableHeaderCell.self, forHeaderFooterViewReuseIdentifier: "header")
         return table
     }()
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,12 +63,10 @@ class LeftMenuVC: UIViewController {
         self.view.layer.masksToBounds = true
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-        
-        
-        
         let logoutButton = UIButton(type: .system) // let preferred over var here
         logoutButton.setTitle("Log Out", for: .normal)
         logoutButton.tintColor = .red
+        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
         view.addSubview(logoutButton)
         
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
@@ -75,8 +74,6 @@ class LeftMenuVC: UIViewController {
         logoutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
         logoutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
-        
-
         
         //Large Titles for iOS 13/14
                 // Alternatively, check Storyboard NavigationBar 'PrefersLargeTitle'
@@ -94,18 +91,24 @@ class LeftMenuVC: UIViewController {
                 
                 // Remove text 'Settings' from back button
                 navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-  
             }
         
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
-        
     }
     
+    
+    @objc func logoutButtonTapped(_ sender: UIButton!) {
+       print("Logout Button was Tapped")
+        
+            self.showLoginViewController()
+        
+    }
 }
     extension LeftMenuVC: UITableViewDelegate, UITableViewDataSource {
+        
         
          func numberOfSections(in tableView: UITableView) -> Int {
                 return sectionTitles.count
@@ -202,6 +205,7 @@ class LeftMenuVC: UIViewController {
             switch (indexPath as NSIndexPath).row {
             case 0:
               // performSegue(withIdentifier: "showCloud", sender: self)
+                print("Case Logout tapped")
                 DispatchQueue.main.async {
                     self.showLoginViewController()
                 }

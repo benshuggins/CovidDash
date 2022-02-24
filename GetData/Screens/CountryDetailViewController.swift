@@ -25,6 +25,7 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
                 }
             }
         }
+    
     var dailyRecoveredData: [DailyRecoveredData] = [] {
             didSet {
                 DispatchQueue.main.async{
@@ -58,7 +59,7 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
         super.viewDidLoad()
         configureTableView()
         getCountryData()
-        view.backgroundColor = .white
+        view.backgroundColor = .secondarySystemBackground
        // title = "\(countryName.uppercased()) Covid Metrics"
         
         
@@ -72,9 +73,16 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
         label.sizeToFit()
         label.text = "\(countryName.uppercased()) Covid19 Metrics\n 1/21/20 to Present"
         self.navigationItem.titleView = label
-        
-        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.all)
+    }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.all)
+//    }
     
     private func configureTableView() {
         view.addSubview(tableView)

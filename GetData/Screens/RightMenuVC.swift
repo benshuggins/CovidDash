@@ -8,6 +8,7 @@
 import UIKit
 
 class RightTableHeaderCell: UITableViewHeaderFooterView, UITableViewDelegate {
+  
     
     static let identifier = "TableHeader"
     
@@ -52,6 +53,10 @@ class RightTableHeaderCell: UITableViewHeaderFooterView, UITableViewDelegate {
 }
    // Need to add CustomTableViewCell
 class RightMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+    }
    
     static let menuVC = RightMenuVC()
     
@@ -76,6 +81,7 @@ class RightMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
     }
+   
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

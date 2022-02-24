@@ -81,6 +81,10 @@ class CountrySelectionVC: UIViewController {
         let leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "text.alignleft"), style: .done, target: self, action: #selector(leftBarButtonTapped))
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+    }
 
     @objc func rightBarButtonTapped() {
         KeychainItem.deleteUserIdentifierFromKeychain()

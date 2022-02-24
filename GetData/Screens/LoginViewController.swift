@@ -13,12 +13,39 @@ class LoginViewController: UIViewController {
     private let appleSignInButton = ASAuthorizationAppleIDButton()
     let countrySelectionVC = CountrySelectionVC()
     
+    let logoImageView: UIImageView = {
+        let logoImage = UIImageView()
+        logoImage.image = UIImage(named: "logo_transparent_background")
+        logoImage.translatesAutoresizingMaskIntoConstraints = false
+        return logoImage
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(appleSignInButton)
+        view.addSubview(logoImageView)
+        logoImageViewConstraints()
         appleSignInButton.addTarget(self, action: #selector(didTapSignInButton), for: .touchUpInside)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        performExistingAccountSetupFlows()
+    }
+    
+    func logoImageViewConstraints() {
+    
+        logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+        logoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        logoImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        logoImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+    }
+
     @objc func didTapSignInButton() {
         let provider = ASAuthorizationAppleIDProvider()
         let request = provider.createRequest()
@@ -30,10 +57,6 @@ class LoginViewController: UIViewController {
         controller.performRequests()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        performExistingAccountSetupFlows()
-    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

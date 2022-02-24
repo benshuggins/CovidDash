@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "SplashScreenIconRound.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "white_logo_dark_background.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
