@@ -18,15 +18,11 @@ struct KeychainItem {
     }
     
     // MARK: Properties
-    
     let service: String
-    
     private(set) var account: String
-    
     let accessGroup: String?
     
     // MARK: Intialization
-    
     init(service: String, account: String, accessGroup: String? = nil) {
         self.service = service
         self.account = account
@@ -34,7 +30,6 @@ struct KeychainItem {
     }
     
     // MARK: Keychain access
-    
     func readItem() throws -> String {
         /*
          Build a query to find the item that matches the service, account and

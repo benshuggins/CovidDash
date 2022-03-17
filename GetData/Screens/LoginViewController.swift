@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
         let logoImage = UIImageView()
         logoImage.image = UIImage(named: "logo_transparent_background")
         logoImage.translatesAutoresizingMaskIntoConstraints = false
+        logoImage.contentMode = .scaleAspectFit
         return logoImage
     }()
     
@@ -24,7 +25,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(appleSignInButton)
         view.addSubview(logoImageView)
-        logoImageViewConstraints()
+        
         appleSignInButton.addTarget(self, action: #selector(didTapSignInButton), for: .touchUpInside)
     }
     
@@ -35,6 +36,17 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         performExistingAccountSetupFlows()
+    }
+    
+    func appleSignInButtonConstraints() {
+        appleSignInButton.translatesAutoresizingMaskIntoConstraints = false
+        appleSignInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        appleSignInButton.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 100).isActive = true
+        appleSignInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 2).isActive = true
+        appleSignInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -2).isActive = true
+        appleSignInButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        
     }
     
     func logoImageViewConstraints() {
@@ -56,12 +68,11 @@ class LoginViewController: UIViewController {
         controller.presentationContextProvider = self
         controller.performRequests()
     }
-    
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        appleSignInButton.frame = CGRect(x: 0, y: 0, width: 250, height: 250)
-        appleSignInButton.center = view.center
+        logoImageViewConstraints()
+        appleSignInButtonConstraints()
     }
 
     // - Tag: perform_appleid_password_request
@@ -93,15 +104,12 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             // For the purpose of this demo app, store the `userIdentifier` in the keychain.
             self.saveUserInKeychain(userIdentifier)
             
-            
             // This is where I jump to after logging in.
             let navController = UINavigationController(rootViewController: countrySelectionVC)
             navController.modalPresentationStyle = .fullScreen
            // self.present(navController, animated:true, completion: nil)
             
-            
             self.show(navController, sender: nil)
-            
         
         case let passwordCredential as ASPasswordCredential:
         
@@ -175,4 +183,7 @@ extension UIViewController {
         self.navigationController?.present(loginViewController, animated: true)
         }
     }
+
+
+
 

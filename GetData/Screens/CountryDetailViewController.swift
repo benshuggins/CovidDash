@@ -34,6 +34,7 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
                 }
             }
         }
+    
     var dailyTotalData: [DailyTotalData] = [] {
             didSet {
                 DispatchQueue.main.async{
@@ -53,16 +54,11 @@ class CountryDetailViewController: UIViewController, ChartViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         getCountryData()
         view.backgroundColor = .secondarySystemBackground
-       // title = "\(countryName.uppercased()) Covid Metrics"
-        
-        
         let label = UILabel()
         label.backgroundColor = .clear
         label.numberOfLines = 3
@@ -241,6 +237,7 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let dataDeath = dailyDeathData[indexPath.row]
         let dataRecovered = dailyRecoveredData[indexPath.row]
         let dataTotal = dailyTotalData[indexPath.row]
@@ -254,4 +251,3 @@ extension CountryDetailViewController: UITableViewDelegate, UITableViewDataSourc
         return "\(dateString)"
         }
     }
-

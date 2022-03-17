@@ -100,6 +100,7 @@
 		CECDEE00269D182300F67FC6 /* CountrySelectionTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionTVCell.swift; sourceTree = "<group>"; };
 		CECDEE05269D260800F67FC6 /* CountryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailViewController.swift; sourceTree = "<group>"; };
 		CEE1E64B27B2133E008D2FD1 /* KeychainItem.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift.swift; sourceTree = "<group>"; };
+		CEE1E74E27C83C3D008D2FD1 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +281,7 @@
 				CECDEDC9269D011300F67FC6 /* Main.storyboard */,
 				CECDEDC3269D011300F67FC6 /* AppDelegate.swift */,
 				CECDEDCC269D011500F67FC6 /* Assets.xcassets */,
+				CEE1E74E27C83C3D008D2FD1 /* Color.xcassets */,
 				CECDEDC5269D011300F67FC6 /* SceneDelegate.swift */,
 				CECDEDCE269D011500F67FC6 /* LaunchScreen.storyboard */,
 				CEE1E64B27B2133E008D2FD1 /* KeychainItem.swift.swift */,

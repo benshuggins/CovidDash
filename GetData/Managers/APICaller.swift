@@ -41,8 +41,6 @@ class APICaller {
                     resultFinal.removeAll(where: { $0.iso == "AX" || $0.iso == "AW" || $0.iso == "BL"  || $0.iso == "BM" || $0.iso == "EH" || $0.iso == "AS" || $0.iso == "AI" || $0.iso == "IO" || $0.iso == "VG" || $0.iso == "BV" || $0.iso == "AU" || $0.iso == "FR" || $0.iso == "UK" || $0.iso == "AQ"})
                     
                     completion(.success(resultFinal))
-                } catch {
-                    completion(.failure(.invalidData))
                 }
             }
         }
@@ -72,9 +70,6 @@ class APICaller {
                         return DailyDeathData(indexDeath: index2-1, dateDeath: date, casesDeath: $0.cases)
                     }
                     completion(.success(models))
-                    
-                } catch {
-                    completion(.failure(.invalidData))
                 }
             }
         }
@@ -105,8 +100,6 @@ func getCountryRecoveredStatus(iso: String, scope: String, completion: @escaping
                 }
                 completion(.success(modelsRecovered))
                 
-            } catch {
-                completion(.failure(.invalidData))
             }
         }
     }
@@ -137,8 +130,6 @@ func getCountryTotalStatus(iso: String, scope: String, completion: @escaping (Re
                 }
                 completion(.success(modelsTotal))
                 
-            } catch {
-                completion(.failure(.invalidData))
             }
         }
     }

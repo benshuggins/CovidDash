@@ -75,7 +75,7 @@ class CountrySelectionVC: UIViewController {
         search.searchBar.placeholder = "Search for a Country"
         navigationItem.searchController = search
         
-        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "text.alignright"), style: .done, target: self, action: #selector(rightBarButtonTapped))
+        let rightBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: .done, target: self, action: #selector(rightBarButtonTapped))
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
 
         let leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "text.alignleft"), style: .done, target: self, action: #selector(leftBarButtonTapped))
@@ -88,18 +88,19 @@ class CountrySelectionVC: UIViewController {
 
     @objc func rightBarButtonTapped() {
         KeychainItem.deleteUserIdentifierFromKeychain()
-        
-//        DispatchQueue.main.async {
-//            self.showLoginViewController()
-//        }
+
 //        print("Sign Out Button Was Pressed")
-        let controller = RightMenuVC()
-        slideInTransitionDelegate = SlideInPresentationManager()
-        slideInTransitionDelegate.direction = .right
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = slideInTransitionDelegate
-        present(controller, animated: true, completion: nil)
-        print("RIGHT BAR BUTTON WAS TAPPED")
+//        let controller = RightMenuVC()
+//        slideInTransitionDelegate = SlideInPresentationManager()
+//        slideInTransitionDelegate.direction = .right
+//        controller.modalPresentationStyle = .custom
+//        controller.transitioningDelegate = slideInTransitionDelegate
+//        present(controller, animated: true, completion: nil)
+//        print("RIGHT BAR BUTTON WAS TAPPED")
+        
+        DispatchQueue.main.async {
+            self.showLoginViewController()
+        }
     }
     
     @objc func leftBarButtonTapped() {

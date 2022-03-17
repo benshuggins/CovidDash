@@ -7,43 +7,10 @@
 
 import UIKit
 
-class LeftTableHeaderCell: UITableViewHeaderFooterView, UITableViewDelegate {
-    
-  
-    static let identifier = "TableHeaderDev"
-
-    private let label: UILabel = {
-        let label = UILabel()
-        label.text = "Api Used:"
-        label.font = .systemFont(ofSize: 22, weight: .semibold)
-        label.textAlignment = .center
-        return label
-    }()
-
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(label)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        label.sizeToFit()
-        label.frame = CGRect(x: 0, y: contentView.frame.size.height-10-label.frame.size.height, width: contentView.frame.size.width, height: contentView.frame.size.height)
-    }
-}
-
 class LeftMenuVC: UIViewController {
     
-    override func viewWillAppear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
-    }
-    
-    var sectionTitles = ["App", "Developer", ""]
-        var sectionContent = [["Api: Covid19api.com", "Get Repo: GitHub"],["Linkedin","Github"],["LOGOUT"]]
+    var sectionTitles = ["About Demo App", "Developer", "Api Used", "Get Code"]
+        var sectionContent = [["How App Works"],["Linkedin","Github"],["Api: Covid19api.com"],["Get Repo: GitHub"]]
        
     let tableView: UITableView = {
        let table = UITableView()
@@ -51,6 +18,10 @@ class LeftMenuVC: UIViewController {
         table.register(RightTableHeaderCell.self, forHeaderFooterViewReuseIdentifier: "header")
         return table
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,20 +34,6 @@ class LeftMenuVC: UIViewController {
         self.view.layer.masksToBounds = true
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-        let logoutButton = UIButton(type: .system) // let preferred over var here
-        logoutButton.setTitle("Log Out", for: .normal)
-        logoutButton.tintColor = .red
-        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
-        view.addSubview(logoutButton)
-        
-        logoutButton.translatesAutoresizingMaskIntoConstraints = false
-        logoutButton.topAnchor.constraint(equalTo: tableView.bottomAnchor).isActive = true
-        logoutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
-        logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
-        logoutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
-        
-        //Large Titles for iOS 13/14
-                // Alternatively, check Storyboard NavigationBar 'PrefersLargeTitle'
         if #available(iOS 13.0, *) {
                     navigationController?.navigationBar.prefersLargeTitles = true
                     navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -93,23 +50,13 @@ class LeftMenuVC: UIViewController {
                 navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
             }
         
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
-    
-    
-    @objc func logoutButtonTapped(_ sender: UIButton!) {
-       print("Logout Button was Tapped")
-        
-            self.showLoginViewController()
-        
-    }
 }
     extension LeftMenuVC: UITableViewDelegate, UITableViewDataSource {
-        
-        
+    
          func numberOfSections(in tableView: UITableView) -> Int {
                 return sectionTitles.count
             }
@@ -120,27 +67,22 @@ class LeftMenuVC: UIViewController {
                 case 0:
                     return sectionContent[0].count      // section 0 is the 1st/Top section 'App'
                 case 1:
-                    return sectionContent[1].count      // section 1 is the 2nd section 'Developer'
+                    return sectionContent[1].count      // section 1 is the 2nd section 'Api Used'
                 case 2:
-                    return sectionContent[2].count      // section 2 is the 3rd section 'Logout'
+                    return sectionContent[2].count      // section 2 is the 3rd section 'Get Code'
+                case 3:
+                    return sectionContent[3].count      // section 2 is the 3rd section 'Get Code'
                 default:
                     return sectionContent[0].count
                 }
-            }
-        
-            func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-                let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? LeftTableHeaderCell
-                
-                return header
         }
     
-        
-            func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+            func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {  
                     
                 return sectionTitles[section]  // section 0 is the 1st section
             }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             //cell.accessoryType = .disclosureIndicator
                 // Configure the cell...array of content within array of headers
@@ -157,69 +99,69 @@ class LeftMenuVC: UIViewController {
                 case 2:  // Section 2 Logout
                     cell.accessoryType = .none
                 
-                
         default: break
                 }
                 return cell
             }
-        
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                 
         switch (indexPath as NSIndexPath).section {
                
          
-            // Section 0 App
+            // Section 0 About App
         case 0:
             switch (indexPath as NSIndexPath).row {
             case 0:
                 print("open an alertView")
-              showSimpleActionSheet()
-              // performSegue(withIdentifier: "showCloud", sender: self)
-            case 1:
-               // print("")
               showSimpleAlert()
+             
             default:
             print(#function, "Error in Switch")
             } // end case section 0 switch
-                   
-            
+    
             // section 1: Developer
         case 1:
             switch (indexPath as NSIndexPath).row {
             case 0:
                 print("Linkedin Developer")
-                if let url = URL(string: "https://www.covid19api.com") {
+                if let url = URL(string: "https://www.linkedin.com/in/benhuggins42/") {
                 UIApplication.shared.open(url)
                 }
             case 1:
-                print("Github Developer")
+                // My GitHub
+                if let url = URL(string: "https://github.com/benshuggins") {
+                UIApplication.shared.open(url)
+                }
            
             default:
-                print("1")
-             // performSegue(withIdentifier: "showAppInfo", sender: self)
+                print("Can't get to benshuggins github")
             }
             
-            
-        case 2: // Section 0 Logout
+        case 2: // Section 2 Api Used:
             switch (indexPath as NSIndexPath).row {
             case 0:
-              // performSegue(withIdentifier: "showCloud", sender: self)
-                print("Case Logout tapped")
-                DispatchQueue.main.async {
-                    self.showLoginViewController()
+                if let url = URL(string: "https://www.covid19api.com") {
+                UIApplication.shared.open(url)
                 }
             default:
             print(#function, "Error in Switch")
-            } // end
+            }
+            
+        case 3: // Section 3 Get Code:
+            switch (indexPath as NSIndexPath).row {
+            case 0:
+                if let url = URL(string: "https://github.com/benshuggins/CovidDash") {
+                UIApplication.shared.open(url)
+                }
+            default:
+            print(#function, "Error in Switch")
+            }
                     
         default: break
-        } // end case section 1switch
-                
+        }
             tableView.deselectRow(at: indexPath, animated: true)
         }
-        
-        
         
         func showSimpleAlert() {
             let alert = UIAlertController(title: "The Point", message: "This Demo app compares how Covid19 has affected Countries of the World on 3 metrics: Total Cases, Total Recovered Cases, Total Deaths per day all Graphically", preferredStyle: .alert)
@@ -230,43 +172,7 @@ class LeftMenuVC: UIViewController {
                self.present(alert, animated: true, completion: nil)
            }
         
-        func showSimpleActionSheet() {
-              let alert = UIAlertController(title: "Title", message: "Please Select an Option", preferredStyle: .actionSheet)
-              alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in
-                  print("User click Dismiss button")
-              }))
-
-              self.present(alert, animated: true, completion: {
-                  print("completion block")
-              })
-          }
-        
-//       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        switch segue.identifier {
-//        case "showCloud":
-//            print("1")
-//       // _ = segue.destination as! CloudTableViewController
-//        case "showDataIntegrityReset":
-//      //  _ = segue.destination as! ResetDataIntegrityViewController
-//            print("1")
-//        case "showAppInfo":
-//      //  let appInfoViewController = segue.destination as! AppInfoViewController
-//      //  appInfoViewController.title = "AppsGym Books Info"
-//            print("1")
-//        case "showCredits":
-//      //  _ = segue.destination as! CreditsViewController
-//            print("1")
-//        case "showPrivacy":
-//            print("1")
-//      //  _ = segue.destination as! PrivacyViewController
-//        case "showBlog":
-//            print("1")
-//      //  _ = segue.destination as! BlogViewController
-//        default:
-//            print("default")
-//       // _ = segue.destination as! SettingsTableViewController
-//        }
-        } // end class
+    }
 
 
 
